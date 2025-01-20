@@ -1,171 +1,441 @@
-/* ===================================================================
- * Count - Main JS
- *
- * ------------------------------------------------------------------- */
+/**
+ * RetinaLogo
+ * Contact Form
+ * Header Fixed
+ * alert box
+ */
 
-(function($) {
+(function ($) {
+  "use strict";
 
-    "use strict";
-    
-    var cfg = {
-        scrollDuration : 800, // smoothscroll duration
-        mailChimpURL   : 'https://facebook.us8.list-manage.com/subscribe/post?u=cdb7b577e41181934ed6a6a44&amp;id=e6957d85dc'   // mailchimp url
+  var themesflatTheme = {
+    // Main init function
+    init: function () {
+      this.config();
+      this.events();
     },
 
-    $WIN = $(window);
+    // Define vars for caching
+    config: function () {
+      this.config = {
+        $window: $(window),
+        $document: $(document),
+      };
+    },
 
-    // Add the User Agent to the <html>
-    // will be used for IE10 detection (Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0))
-    var doc = document.documentElement;
-    doc.setAttribute('data-useragent', navigator.userAgent);
+    // Events
+    events: function () {
+      var self = this;
 
-    // svg fallback
-    if (!Modernizr.svg) {
-        $(".home-logo img").attr("src", "images/logo.png");
+      // Run on document ready
+      self.config.$document.on("ready", function () {
+        // Retina Logos
+        self.retinaLogo();
+      });
+
+      // Run on Window Load
+      self.config.$window.on("load", function () {});
+    },
+  }; // end themesflatTheme
+
+  // Start things up
+  themesflatTheme.init();
+
+  /* RetinaLogo
+  ------------------------------------------------------------------------------------- */
+  var retinaLogos = function () {
+    var retina = window.devicePixelRatio > 1 ? true : false;
+    if (retina) {
+      $("#site-logo-inner").find("img").attr({
+        src: "assets/images/logo/logo@2x.png",
+        width: "197",
+        height: "48",
+      });
+
+      $("#logo-footer.style").find("img").attr({
+        src: "assets/images/logo/logo-footer@2x.png",
+        width: "197",
+        height: "48",
+      });
+      $("#logo-footer.style2").find("img").attr({
+        src: "assets/images/logo/logo@2x.png",
+        width: "197",
+        height: "48",
+      });
     }
+  };
 
+  /* Contact Form
+  ------------------------------------------------------------------------------------- */
+  var ajaxContactForm = function () {
+    $("#contactform").each(function () {
+      $(this).validate({
+        submitHandler: function (form) {
+          var $form = $(form),
+            str = $form.serialize(),
+            loading = $("<div />", { class: "loading" });
 
-   /* Preloader
-    * -------------------------------------------------- */
-    var ssPreloader = function() {
-        
-        $("html").addClass('ss-preload');
+          $.ajax({
+            type: "POST",
+            url: $form.attr("action"),
+            data: str,
+            beforeSend: function () {
+              $form.find(".send-wrap").append(loading);
+            },
+            success: function (msg) {
+              var result, cls;
+              if (msg === "Success") {
+                result =
+                  "Email Sent Successfully. Thank you, Your application is accepted - we will contact you shortly";
+                cls = "msg-success";
+              } else {
+                result = "Error sending email.";
+                cls = "msg-error";
+              }
+              $form.prepend(
+                $("<div />", {
+                  class: "flat-alert " + cls,
+                  text: result,
+                }).append(
+                  $(
+                    '<a class="close" href="#"><i class="icon icon-close2"></i></a>'
+                  )
+                )
+              );
 
-        $WIN.on('load', function() {
+              $form.find(":input").not(".submit").val("");
+            },
+            complete: function (xhr, status, error_thrown) {
+              $form.find(".loading").remove();
+            },
+          });
+        },
+      });
+    }); // each contactform
+  };
+  /* Header Fixed
+  ------------------------------------------------------------------------------------- */
+  var headerFixed = function () {
+    if ($("header").hasClass("header-fixed")) {
 
-            // will first fade out the loading animation 
-            $("#loader").fadeOut("slow", function() {
-                // will fade out the whole DIV that covers the website.
-                $("#preloader").delay(300).fadeOut("slow");
-            }); 
-            
-            // for hero content animations 
-            $("html").removeClass('ss-preload');
-            $("html").addClass('ss-loaded');
-        
+      var nav = $("#header");
+      if (nav.length) {
+        var offsetTop = nav.offset().top,
+          headerHeight = nav.height(),
+          injectSpace = $("<div>", {
+            height: headerHeight,
+          });
+        injectSpace.hide();
+
+        $(window).on("load scroll", function () {
+          if ($(window).scrollTop() > 0) {
+            nav.addClass("is-fixed");
+            injectSpace.show();
+            $("#trans-logo").attr("src", "images/logo/logo@2x.png");
+          } else {
+            nav.removeClass("is-fixed");
+            injectSpace.hide();
+            $("#trans-logo").attr("src", "images/logo/logo@2x-white.png");
+          }
         });
-    };
+      }
+    }
+  };
 
+  $("#showlogo").prepend(
+    '<a href="index.html"><img id="theImg" src="assets/images/logo/logo2.png" /></a>'
+  );
 
-   /* info toggle
-    * ------------------------------------------------------ */
-    var ssInfoToggle = function() {
+  // =========NICE SELECT=========
+  $(".select_js").niceSelect();
 
-        //open/close lateral navigation
-        $('.info-toggle').on('click', function(event) {
+  new WOW().init();
 
-            event.preventDefault();
-            $('body').toggleClass('info-is-visible');
+  //Submenu Dropdown Toggle
+  if ($(".main-header li.dropdown2 ul").length) {
+    $(".main-header li.dropdown2").append('<div class="dropdown2-btn"></div>');
 
-        });
-
-    };
-
-
-   /* slick slider
-    * ------------------------------------------------------ */
-    var ssSlickSlider = function() {
-        
-        $('.home-slider').slick({
-            arrows: false,
-            dots: false,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            fade: true,
-            speed: 3000
-        });
-
-    };
-
-
-   /* placeholder plugin settings
-    * ------------------------------------------------------ */
-    var ssPlaceholder = function() {
-        $('input, textarea, select').placeholder();
-    };
-
-
-   /* final countdown
- * ------------------------------------------------------ */
-var ssFinalCountdown = function() {
-
-    // Set your target date here (using your timezone)
-    var finalDate = new Date("January 20, 2025 00:00:00").getTime();
-
-    $('.home-content__clock').countdown(finalDate)
-    .on('update.countdown finish.countdown', function(event) {
-
-        var str = '<div class=\"top\"><div class=\"time days\">' +
-                  '<span>%D</span>' + 
-                  '<span>Days</span>' + 
-                  '</div></div>' +
-                  '<div class=\"time hours\">' +
-                  '<span>%H</span>' +
-                  '<span>H</span></div>' +
-                  '<div class=\"time minutes\">' +
-                  '<span>%M</span>' +
-                  '<span>M</span></div>' +
-                  '<div class=\"time seconds\">' +
-                  '<span>%S</span>' +
-                  '<span>S</span></div>';
-
-        $(this)
-        .html(event.strftime(str));
-
+    //Dropdown Button
+    $(".main-header li.dropdown2 .dropdown2-btn").on("click", function () {
+      $(this).prev("ul").slideToggle(500);
     });
 
-    // Add handler for when countdown finishes
-    $('.home-content__clock').countdown(finalDate)
-    .on('finish.countdown', function(event) {
-        $(this).html('<div class="countdown-finished">Website Launched!</div>');
+    //Disable dropdown parent link
+    $(".navigation li.dropdown2 > a").on("click", function (e) {
+      e.preventDefault();
     });
-};
 
+    //Disable dropdown parent link
+    $(
+      ".main-header .navigation li.dropdown2 > a,.hidden-bar .side-menu li.dropdown2 > a"
+    ).on("click", function (e) {
+      e.preventDefault();
+    });
 
-   /* AjaxChimp
-    * ------------------------------------------------------ */
-    var ssAjaxChimp = function() {
-        
-        $('#mc-form').ajaxChimp({
-            language: 'es',
-            url: cfg.mailChimpURL
-        });
+    $(".price-block .features .arrow").on("click", function (e) {
+      $(e.target.offsetParent.offsetParent.offsetParent).toggleClass(
+        "active-show-hidden"
+      );
+    });
+  }
 
-        // Mailchimp translation
-        //
-        //  Defaults:
-        //	 'submit': 'Submitting...',
-        //  0: 'We have sent you a confirmation email',
-        //  1: 'Please enter a value',
-        //  2: 'An email address must contain a single @',
-        //  3: 'The domain portion of the email address is invalid (the portion after the @: )',
-        //  4: 'The username portion of the email address is invalid (the portion before the @: )',
-        //  5: 'This email address looks fake or invalid. Please enter a real email address'
+  // Mobile Nav Hide Show
+  if ($(".mobile-menu").length) {
+    //$('.mobile-menu .menu-box').mCustomScrollbar();
 
-        $.ajaxChimp.translations.es = {
-            'submit': 'Submitting...',
-            0: '<i class="fas fa-check"></i> We have sent you a confirmation email',
-            1: '<i class="fas fa-exclamation-triangle"></i> You must enter a valid e-mail address.',
-            2: '<i class="fas fa-exclamation-triangle"></i> E-mail address is not valid.',
-            3: '<i class="fas fa-exclamation-triangle"></i> E-mail address is not valid.',
-            4: '<i class="fas fa-exclamation-triangle"></i> E-mail address is not valid.',
-            5: '<i class="fas fa-exclamation-triangle"></i> E-mail address is not valid.'
+    var mobileMenuContent = $(".main-header .nav-outer .main-menu").html();
+    $(".mobile-menu .menu-box .menu-outer").append(mobileMenuContent);
+    $(".sticky-header .main-menu").append(mobileMenuContent);
+
+    //Hide / Show Submenu
+    $(".mobile-menu .navigation > li.dropdown2 > .dropdown2-btn").on(
+      "click",
+      function (e) {
+        e.preventDefault();
+        var target = $(this).parent("li").children("ul");
+        var args = { duration: 300 };
+        if ($(target).is(":visible")) {
+          $(this).parent("li").removeClass("open");
+          $(target).slideUp(args);
+          $(this)
+            .parents(".navigation")
+            .children("li.dropdown2")
+            .removeClass("open");
+          $(this)
+            .parents(".navigation")
+            .children("li.dropdown2 > ul")
+            .slideUp(args);
+          return false;
+        } else {
+          $(this)
+            .parents(".navigation")
+            .children("li.dropdown2")
+            .removeClass("open");
+          $(this)
+            .parents(".navigation")
+            .children("li.dropdown2")
+            .children("ul")
+            .slideUp(args);
+          $(this).parent("li").toggleClass("open");
+          $(this).parent("li").children("ul").slideToggle(args);
         }
+      }
+    );
+
+    //3rd Level Nav
+    $(
+      ".mobile-menu .navigation > li.dropdown2 > ul  > li.dropdown2 > .dropdown2-btn"
+    ).on("click", function (e) {
+      e.preventDefault();
+      var targetInner = $(this).parent("li").children("ul");
+
+      if ($(targetInner).is(":visible")) {
+        $(this).parent("li").removeClass("open");
+        $(targetInner).slideUp(500);
+        $(this)
+          .parents(".navigation > ul")
+          .find("li.dropdown2")
+          .removeClass("open");
+        $(this)
+          .parents(".navigation > ul")
+          .find("li.dropdown > ul")
+          .slideUp(500);
+        return false;
+      } else {
+        $(this)
+          .parents(".navigation > ul")
+          .find("li.dropdown2")
+          .removeClass("open");
+        $(this)
+          .parents(".navigation > ul")
+          .find("li.dropdown2 > ul")
+          .slideUp(500);
+        $(this).parent("li").toggleClass("open");
+        $(this).parent("li").children("ul").slideToggle(500);
+      }
+    });
+
+    //Menu Toggle Btn
+    $(".mobile-nav-toggler").on("click", function () {
+      $("body").addClass("mobile-menu-visible");
+    });
+
+    //Menu Toggle Btn
+    $(".mobile-menu .menu-backdrop, .close-btn").on("click", function () {
+      $("body").removeClass("mobile-menu-visible");
+      $(".mobile-menu .navigation > li").removeClass("open");
+      $(".mobile-menu .navigation li ul").slideUp(0);
+    });
+
+    $(document).keydown(function (e) {
+      if (e.keyCode === 27) {
+        $("body").removeClass("mobile-menu-visible");
+        $(".mobile-menu .navigation > li").removeClass("open");
+        $(".mobile-menu .navigation li ul").slideUp(0);
+      }
+    });
+  }
+
+  var ajaxSubscribe = {
+    obj: {
+      subscribeEmail: $("#subscribe-email"),
+      subscribeButton: $("#subscribe-button"),
+      subscribeMsg: $("#subscribe-msg"),
+      subscribeContent: $("#subscribe-content"),
+      dataMailchimp: $("#subscribe-form").attr("data-mailchimp"),
+      success_message:
+        '<div class="notification_ok">Thank you for joining our mailing list! Please check your email for a confirmation link.</div>',
+      failure_message:
+        '<div class="notification_error">Error! <strong>There was a problem processing your submission.</strong></div>',
+      noticeError: '<div class="notification_error">{msg}</div>',
+      noticeInfo: '<div class="notification_error">{msg}</div>',
+      basicAction: "mail/subscribe.php",
+      mailChimpAction: "mail/subscribe-mailchimp.php",
+    },
+
+    eventLoad: function () {
+      var objUse = ajaxSubscribe.obj;
+
+      $(objUse.subscribeButton).on("click", function () {
+        if (window.ajaxCalling) return;
+        var isMailchimp = objUse.dataMailchimp === "true";
+
+        if (isMailchimp) {
+          ajaxSubscribe.ajaxCall(objUse.mailChimpAction);
+        } else {
+          ajaxSubscribe.ajaxCall(objUse.basicAction);
+        }
+      });
+    },
+
+    ajaxCall: function (action) {
+      window.ajaxCalling = true;
+      var objUse = ajaxSubscribe.obj;
+      var messageDiv = objUse.subscribeMsg.html("").hide();
+      $.ajax({
+        url: action,
+        type: "POST",
+        dataType: "json",
+        data: {
+          subscribeEmail: objUse.subscribeEmail.val(),
+        },
+        success: function (responseData, textStatus, jqXHR) {
+          if (responseData.status) {
+            objUse.subscribeContent.fadeOut(500, function () {
+              messageDiv.html(objUse.success_message).fadeIn(500);
+            });
+          } else {
+            switch (responseData.msg) {
+              case "email-required":
+                messageDiv.html(
+                  objUse.noticeError.replace(
+                    "{msg}",
+                    "Error! <strong>Email is required.</strong>"
+                  )
+                );
+                break;
+              case "email-err":
+                messageDiv.html(
+                  objUse.noticeError.replace(
+                    "{msg}",
+                    "Error! <strong>Email invalid.</strong>"
+                  )
+                );
+                break;
+              case "duplicate":
+                messageDiv.html(
+                  objUse.noticeError.replace(
+                    "{msg}",
+                    "Error! <strong>Email is duplicate.</strong>"
+                  )
+                );
+                break;
+              case "filewrite":
+                messageDiv.html(
+                  objUse.noticeInfo.replace(
+                    "{msg}",
+                    "Error! <strong>Mail list file is open.</strong>"
+                  )
+                );
+                break;
+              case "undefined":
+                messageDiv.html(
+                  objUse.noticeInfo.replace(
+                    "{msg}",
+                    "Error! <strong>undefined error.</strong>"
+                  )
+                );
+                break;
+              case "api-error":
+                objUse.subscribeContent.fadeOut(500, function () {
+                  messageDiv.html(objUse.failure_message);
+                });
+            }
+            messageDiv.fadeIn(500);
+          }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          alert("Connection error");
+        },
+        complete: function (data) {
+          window.ajaxCalling = false;
+        },
+      });
+    },
+  };
+
+  /* alert box
+  ------------------------------------------------------------------------------------- */
+  var alertBox = function () {
+    $(document).on("click", ".close", function (e) {
+      $(this).closest(".flat-alert").remove();
+      e.preventDefault();
+    });
+  };
+
+    /* footer accordion
+  -------------------------------------------------------------------------*/
+  var handleFooter = function () {
+    var footerAccordion = function () {
+      var args = { duration: 250 };
+      $(".footer-heading-mobile").on("click", function () {
+        $(this).parent(".footer-col-block").toggleClass("open");
+        if (!$(this).parent(".footer-col-block").is(".open")) {
+          $(this).next().slideUp(args);
+        } else {
+          $(this).next().slideDown(args);
+        }
+      });
     };
+    function handleAccordion() {
+      if (matchMedia("only screen and (max-width: 767px)").matches) {
+        if (!$(".footer-heading-mobile").data("accordion-initialized")) {
+          footerAccordion();
+          $(".footer-heading-mobile").data("accordion-initialized", true); 
+        }
+      } else {
+        $(".footer-heading-mobile").off("click");
+        $(".footer-heading-mobile").parent(".footer-col-block").removeClass("open");
+        $(".footer-heading-mobile").next().removeAttr("style");
+        $(".footer-heading-mobile").data("accordion-initialized", false); 
+      }
+    }
+    handleAccordion();
+    window.addEventListener("resize", function () {
+      handleAccordion();
+    });  
+  };
 
 
-   /* initialize
-    * ------------------------------------------------------ */
-    (function ssInit() {
-        
-        ssPreloader();
-        ssInfoToggle();
-        ssSlickSlider();
-        ssPlaceholder();
-        ssFinalCountdown();
-        ssAjaxChimp();
-
-    })();
-
-
+  // Dom Ready
+  $(function () {
+    $(window).on("load resize", function () {
+      retinaLogos();
+    });
+    headerFixed();
+    ajaxContactForm();
+    ajaxSubscribe.eventLoad();
+    alertBox();
+    handleFooter();
+  });
 })(jQuery);
