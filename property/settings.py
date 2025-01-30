@@ -31,7 +31,7 @@ TEMPLATES_DEBUG = True
 ALLOWED_HOSTS = []
 
 
-LOGIN_REDIRECT_URL = '/' 
+LOGIN_REDIRECT_URL = '/dashboard' 
 LOGOUT_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -40,6 +40,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -62,6 +63,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'property.urls'
+
+
+JAZZMIN_SETTINGS = {
+    "show_ui_builder": True,  # Allows customization of forms
+    "related_modal_active": True,
+}
 
 TEMPLATES = [
     {

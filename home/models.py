@@ -1,5 +1,12 @@
 from django.db import models
 from django.conf import settings
+import random
+import string
+
+
+def generate_property_id():
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+
 
 class Property(models.Model):
     STATUS_CHOICES = [
@@ -9,13 +16,20 @@ class Property(models.Model):
     ]
 
     LABEL_CHOICES = [
-        ('land_to_sell', 'Land to Sell'),
-        ('short_let', 'Short Let'),
-        ('long_let', 'Long Let'),
-        ('building_to_sell', 'Building to Sell'),
+        ('land_to_sell', 'land_to_sell'),
+        # ('short_let', 'Short Let'),
+        # ('long_let', 'Long Let'),
+        ('building_to_sell', 'building_to_sell'),
     ]
 
-    title = models.CharField(max_length=200, blank=True, null=True)
+    id = models.CharField(
+        max_length=8, 
+        primary_key=True, 
+        unique=True, 
+        editable=False, 
+        default=generate_property_id
+    )
+    title = models.CharField(max_length=200, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     zip_code = models.CharField(max_length=20, blank=True, null=True)
@@ -24,7 +38,6 @@ class Property(models.Model):
     label = models.CharField(max_length=50, choices=LABEL_CHOICES, blank=True, null=True)
     size = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # Size in square meters, for example
     land_area = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)  # Land area in square meters
-    property_id = models.CharField(max_length=50, unique=True, blank=True, null=True)  # Unique property ID
     rooms = models.PositiveIntegerField(blank=True, null=True)
     bedrooms = models.PositiveIntegerField(blank=True, null=True)
     bathrooms = models.PositiveIntegerField(blank=True, null=True)

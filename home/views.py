@@ -6,12 +6,15 @@ from django.contrib import messages
 
 def index(request):
     properties = Property.objects.all()
-    return render(request, 'properties/index.html', {'properties': properties})
+    lands = Property.objects.filter(label='land_to_sell')
+    buildings = Property.objects.filter(label='building_to_sell')
+    
+    return render(request, 'properties/index.html', {'properties': properties, 'lands': lands, 'buildings': buildings})
 
-@verified_user_required
 def property_detail(request, property_id):
     property = get_object_or_404(Property, pk=property_id)
-    return render(request, 'properties/property_detail.html', {'property': property})
+    images = PropertyImage.objects.filter(property=property)
+    return render(request, 'properties/property-details.html', {'property': property, 'images': images})
 
 @verified_user_required
 def dashboard(request):
@@ -19,21 +22,21 @@ def dashboard(request):
     properties = Property.objects.filter(agent=user)
 
     # Count properties by status
-    approved_count = properties.filter(status='approved').count()
+    # approved_count = properties.filter(status='approved').count()
     sold_count = properties.filter(status='sold').count()
     rented_count = properties.filter(status='rented').count()
-    pending_count = properties.filter(status='pending').count()
+    # pending_count = properties.filter(status='pending').count()
 
-    total_properties = approved_count + sold_count + rented_count
+    total_properties = sold_count + rented_count
 
     return render(request, 'properties/dashboard.html', {
         'user': user,
         'properties': properties,
         'total_properties': total_properties,
-        'approved_count': approved_count,
+        # 'approved_count': approved_count,
         'sold_count': sold_count,
         'rented_count': rented_count,
-        'pending_count': pending_count,
+        # 'pending_count': pending_count,
     })
 
 
@@ -50,7 +53,6 @@ def add_property(request):
         label = request.POST.get('label', '').strip()
         size = request.POST.get('size', '').strip()
         land_area = request.POST.get('land_area', '').strip()
-        property_id = request.POST.get('property_id', '').strip()
         rooms = request.POST.get('rooms', '').strip()
         bedrooms = request.POST.get('bedrooms', '').strip()
         bathrooms = request.POST.get('bathrooms', '').strip()
@@ -85,7 +87,6 @@ def add_property(request):
                 label=label if label else None,
                 size=float(size) if size else None,
                 land_area=float(land_area) if land_area else None,
-                property_id=property_id if property_id else None,
                 rooms=int(rooms) if rooms else None,
                 bedrooms=int(bedrooms) if bedrooms else None,
                 bathrooms=int(bathrooms) if bathrooms else None,
@@ -93,7 +94,7 @@ def add_property(request):
                 video_url=video_url if video_url else None,
                 price=price,
                 agent=user,
-                status='pending'
+                status='approved'
             )
 
             # Save images (if provided)
@@ -113,16 +114,16 @@ def add_property(request):
 
     return render(request, 'properties/add-property.html', {'user': request.user})
 
-
+@verified_user_required
 def my_profile(request):
     user = request.user
     return render(request, 'properties/my-profile.html', {'user': user})   
 
-def verification_required(request):
-    return render(request, 'properties/verification_required.html')
+# def verification_required(request):
+#     return render(request, 'properties/verification_required.html')
 
-def pricing(request):
-    return render(request, 'properties/pricing.html')
+# def pricing(request):
+#     return render(request, 'properties/pricing.html')
 
 def about(request):
     return render(request, 'properties/about-us.html')
@@ -135,4 +136,7 @@ def faq(request):
 
 def services(request):
     return render(request, 'properties/our-service.html')
+
+def direct_contact(request):
+    return render(request, 'properties/direct-contact.html')
 

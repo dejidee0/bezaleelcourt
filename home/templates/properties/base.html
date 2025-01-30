@@ -69,7 +69,6 @@
                                                             <ul>
                                                                 <li><a href="{% url 'about' %}">About Us</a></li>
                                                                 <li><a href="{% url 'services' %}">Our Services</a></li>
-                                                                <li><a href="{% url 'pricing' %}">Pricing</a></li>
                                                                 <li><a href="{% url 'contact' %}">Contact Us</a></li>
                                                                 <li><a href="{% url 'faq' %}">FAQs</a></li>    
                                                             </ul>
@@ -87,26 +86,20 @@
                                 </div>
                                 <div class="inner-header-right header-account">
                                     {% if user.is_authenticated %}
-                                        <p>Welcome, {{ user.first_name }}!</p>
+                                        <p>Welcome, {{ user.username }}!</p>
                                        <form method="post" action="{% url 'logout' %}">
                                             {% csrf_token %}
                                             <button class="tf-btn btn-line btn-login" type="submit">Logout</button>
                                         </form>
-                                    {% else %}
-                                        <a href="#modalLogin" data-bs-toggle="modal" class="tf-btn btn-line btn-login">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M13.1251 5C13.1251 5.8288 12.7959 6.62366 12.2099 7.20971C11.6238 7.79576 10.8289 8.125 10.0001 8.125C9.17134 8.125 8.37649 7.79576 7.79043 7.20971C7.20438 6.62366 6.87514 5.8288 6.87514 5C6.87514 4.1712 7.20438 3.37634 7.79043 2.79029C8.37649 2.20424 9.17134 1.875 10.0001 1.875C10.8289 1.875 11.6238 2.20424 12.2099 2.79029C12.7959 3.37634 13.1251 4.1712 13.1251 5ZM3.75098 16.765C3.77776 15.1253 4.44792 13.5618 5.61696 12.4117C6.78599 11.2616 8.36022 10.6171 10.0001 10.6171C11.6401 10.6171 13.2143 11.2616 14.3833 12.4117C15.5524 13.5618 16.2225 15.1253 16.2493 16.765C14.2888 17.664 12.1569 18.1279 10.0001 18.125C7.77014 18.125 5.65348 17.6383 3.75098 16.765Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            Sign in  
-                                        </a>
+                                   
                                     {% endif %}
                                         
                                         <div class="flat-bt-top">
-                                            <a class="tf-btn primary" href="{% url 'add_property' %}">
+                                            <a class="tf-btn primary" href="{% url 'direct_contact' %}">
                                                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M13.625 14.375V17.1875C13.625 17.705 13.205 18.125 12.6875 18.125H4.5625C4.31386 18.125 4.0754 18.0262 3.89959 17.8504C3.72377 17.6746 3.625 17.4361 3.625 17.1875V6.5625C3.625 6.045 4.045 5.625 4.5625 5.625H6.125C6.54381 5.62472 6.96192 5.65928 7.375 5.72834M13.625 14.375H16.4375C16.955 14.375 17.375 13.955 17.375 13.4375V9.375C17.375 5.65834 14.6725 2.57417 11.125 1.97834C10.7119 1.90928 10.2938 1.87472 9.875 1.875H8.3125C7.795 1.875 7.375 2.295 7.375 2.8125V5.72834M13.625 14.375H8.3125C8.06386 14.375 7.8254 14.2762 7.64959 14.1004C7.47377 13.9246 7.375 13.6861 7.375 13.4375V5.72834M17.375 11.25V9.6875C17.375 8.94158 17.0787 8.22621 16.5512 7.69876C16.0238 7.17132 15.3084 6.875 14.5625 6.875H13.3125C13.0639 6.875 12.8254 6.77623 12.6496 6.60041C12.4738 6.4246 12.375 6.18614 12.375 5.9375V4.6875C12.375 4.31816 12.3023 3.95243 12.1609 3.6112C12.0196 3.26998 11.8124 2.95993 11.5512 2.69876C11.2901 2.4376 10.98 2.23043 10.6388 2.08909C10.2976 1.94775 9.93184 1.875 9.5625 1.875H8.625" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
-                                                Submit Property
+                                                Direct Contact
                                             </a>
                                         </div>  
                                 </div>
@@ -126,7 +119,7 @@
                     <nav class="menu-box">
                         <div class="nav-logo"><a href="index.html"><img src="images/logo/bnn.png.png" alt="nav-logo" width="174" height="44"></a></div>
                         <div class="bottom-canvas">
-                            {% if user.is_authenticated %} 
+                            <!-- {% if user.is_authenticated %} 
                                <form method="post" action="{% url 'logout' %}">
                                     {% csrf_token %}
                                     <button class="tf-btn btn-line btn-login" type="submit">Logout</button>
@@ -137,12 +130,12 @@
                                 <span>/</span>
                                 <a href="#modalRegister" data-bs-toggle="modal">Register</a>
                             </div>
-                            {% endif %}
+                            {% endif %} -->
 
                             
                             <div class="menu-outer"></div>
                             <div class="button-mobi-sell">
-                                <a class="tf-btn primary" href="{% url 'add_property' %}">Submit Property</a>
+                                <a class="tf-btn primary" href="{% url 'direct_contact' %}">Direct Contact</a>
                             </div> 
                             <div class="mobi-icon-box">
                                 <div class="box d-flex align-items-center">
@@ -245,8 +238,6 @@
                             <div class="fw-7 text-white footer-heading-mobile">Categories</div>
                             <div class="tf-collapse-content">
                                 <ul class="mt-10 navigation-menu-footer">
-                                    <li> <a href="{% url 'pricing' %}" class="caption-1 text-variant-2">Pricing Plans</a> </li>
-    
                                     <li> <a href="{% url 'services' %}" class="caption-1 text-variant-2">Our Services</a> </li>
     
                                     <li> <a href="{% url 'about' %}" class="caption-1 text-variant-2">About Us</a> </li>
@@ -282,165 +273,6 @@
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 286.138;"></path>
         </svg>
-    </div>
-
-    <!-- popup login -->
-    <div class="modal modal-account fade" id="modalLogin">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                    {% if messages %}
-                    <div>
-                        {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                <div class="flat-account">
-                    <div class="banner-account">
-                        <img src="images/banner/banner-account1.jpg" alt="banner">
-                    </div>
-                    <form method="POST" class="form-account" action="{% url 'login' %}">
-    {% csrf_token %}
-    <div class="title-box">
-        <h4>Login</h4>
-        <span class="close-modal icon-close2" data-bs-dismiss="modal"></span>
-
-    </div>
-    <div class="box">
-        <!-- Username or Email Field -->
-        <fieldset class="box-fieldset">
-            <label for="email">Email</label>
-            <div class="ip-field">
-                <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="..." stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <input type="text" id="email" name="email" class="form-control" placeholder="Your email" required>   
-            </div>
-        </fieldset>
-
-        <!-- Password Field -->
-        <fieldset class="box-fieldset">
-            <label for="password">Password</label>
-            <div class="ip-field">
-                <svg class="icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="..." stroke="#A3ABB0" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Your password" required>
-            </div>
-            {% comment %} <div class="text-forgot text-end"><a href="{% url 'password_reset' %}">Forgot password?</a></div> {% endcomment %}
-        </fieldset>
-    </div>
-
-    <div class="box box-btn">
-        <button type="submit" class="tf-btn primary w-100">Login</button>
-        <div class="text text-center">Don’t you have an account? 
-            <a href="#modalRegister" data-bs-toggle="modal" class="text-primary">Register</a>
-        </div>
-    </div>
-    {% comment %} <p class="box text-center caption-2">or login with</p>
-    <div class="group-btn">
-        <a href="{% url 'social:begin' 'google' %}" class="btn-social">
-            <img src="{% static 'images/logo/google.jpg' %}" alt="Google">
-            Google
-        </a>
-        <a href="{% url 'social:begin' 'facebook' %}" class="btn-social">
-            <img src="{% static 'images/logo/fb.jpg' %}" alt="Facebook">
-            Facebook
-        </a>
-    </div> {% endcomment %}
-</form>
-
-                   
-                  
-                </div>
-            </div> 
-        </div>
-    </div>
-    <!-- popup register -->
-    <div class="modal modal-account fade" id="modalRegister">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                 {% if messages %}
-                    <div>
-                        {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                <div class="flat-account">
-                    <div class="banner-account">
-                        <img src="images/banner/banner-account2.jpg" alt="banner">
-                    </div>
-<form class="form-account" action="{% url 'register' %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="title-box">
-        <h4>Register</h4>
-        <span class="close-modal icon-close2" data-bs-dismiss="modal"></span>
-
-    </div>
-    <div class="box">
-        <fieldset class="box-fieldset">
-            <label>First name</label>
-            <div class="ip-field">
-                <input type="text" name="first_name" class="form-control" placeholder="First name" required>
-            </div>
-        </fieldset>
-         <fieldset class="box-fieldset">
-            <label>Last name</label>
-            <div class="ip-field">
-                <input type="text" name="last_name" class="form-control" placeholder="Last name" required>
-            </div>
-        </fieldset>
-        <fieldset class="box-fieldset">
-            <label>Address</label>
-            <div class="ip-field">
-                <input type="text" name="address" class="form-control" placeholder="Adress" required>
-            </div>
-        </fieldset>
-        <fieldset class="box-fieldset">
-            <label>Bio</label>
-            <div class="ip-field">
-                <input type="text" name="bio" class="form-control" placeholder="Bio" required>
-            </div>
-        </fieldset>
-        <fieldset class="box-fieldset">
-            <label>Email address</label>
-            <div class="ip-field">
-                <input type="email" name="email" class="form-control" placeholder="Email address" required>
-            </div>
-        </fieldset>
-        <fieldset class="box-fieldset">
-            <label>Phone number</label>
-            <div class="ip-field">
-                <input type="number" name="phone_number" class="form-control" placeholder="Phone number" required>
-            </div>
-        </fieldset>
-        <fieldset class="box-fieldset">
-            <label>Password</label>
-            <div class="ip-field">
-                <input type="password" name="password" class="form-control" placeholder="Your password" required>
-            </div>
-        </fieldset>
-        <fieldset class="box-fieldset">
-            <label>Confirm password</label>
-            <div class="ip-field">
-                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm password" required>
-            </div>
-        </fieldset>
-        <fieldset class="box-fieldset">
-        <label>Profile Picture</label>
-            <div class="ip-field">
-                <input type="file" name="profile_picture" class="form-control" accept="image/*" required>
-            </div>
-        </fieldset>
-        <button type="submit" class="btn btn-primary">Register</button>
-    </div>
-</form>
-                   
-                  
-                </div>
-            </div> 
-        </div>
     </div>
 
     <!-- JavaScript -->

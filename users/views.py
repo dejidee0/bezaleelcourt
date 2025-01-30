@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import user_passes_test
 from .models import CustomUser
 from django.contrib import messages
 from django.contrib.auth.views import LoginView
@@ -7,15 +8,16 @@ from .forms import CustomLoginForm
 from django.contrib.auth import authenticate, login
 
 
+def is_admin(user):
+    return user.is_authenticated and user.is_staff  # Only allow staff/admin users
+
+
 def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         phone_number = request.POST['phone_number']
-        if 'profile_picture' in request.FILES:
-            profile_picture = request.FILES['profile_picture']
-        else:
-            profile_picture = None
+        profile_picture = request.FILES.get('profile_picture', None)
         address = request.POST['address']
         bio = request.POST['bio']
         email = request.POST['email'].lower()
@@ -25,26 +27,27 @@ def register(request):
         if password == confirm_password:
             if CustomUser.objects.filter(username=email).exists():
                 messages.error(request, 'Email already exists.')
-            elif phone_number == '':
+            elif not phone_number:
                 messages.error(request, 'Phone number is required.')
             else:
-                user = CustomUser.objects.create_user(first_name=first_name,
-                                                        last_name=last_name,
-                                                        phone_number=phone_number,
-                                                        profile_picture=profile_picture,
-                                                        address=address,
-                                                        bio=bio,
-                                                        username=email,
-                                                        email=email, 
-                                                        password=password)
+                user = CustomUser.objects.create_user(
+                    first_name=first_name,
+                    last_name=last_name,
+                    phone_number=phone_number,
+                    profile_picture=profile_picture,
+                    address=address,
+                    bio=bio,
+                    username=email,
+                    email=email, 
+                    password=password
+                )
                 user.save()
                 messages.success(request, 'Registration successful. Please log in.')
-                return redirect('home')
+                return redirect('login')
         else:
             messages.error(request, 'Passwords do not match.')
 
-    return redirect('home')
-
+    return render(request, 'register.html')
 
 
 def custom_login_view(request):
@@ -64,5 +67,6 @@ def custom_login_view(request):
             return redirect("dashboard")  # Redirect to the home page
         else:
             messages.error(request, "Invalid username or password.")
+            return render(request, 'login.html')
     
-    return redirect("home")
+    return render(request, 'login.html')
