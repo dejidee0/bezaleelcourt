@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Create and activate virtual environment
-python3 -m venv venv
+python3.9 -m venv venv
 source venv/bin/activate
 
 # Upgrade pip
@@ -11,8 +10,8 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Run migrations
-python manage.py makemigrations --noinput
-python manage.py migrate --noinput
+python3.9 manage.py makemigrations --noinput
+python3.9 manage.py migrate --noinput
 
 # Collect static files
-python manage.py collectstatic --noinput
+python3.9 manage.py collectstatic --noinput
