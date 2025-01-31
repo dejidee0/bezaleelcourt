@@ -1,7 +1,18 @@
- #!/usr/bin/env bash
- 
-python3 -m pip install -r requirements.txt
-python3 manage.py makemigrations --noinput
-python3 manage.py migrate --noinput
+#!/usr/bin/env bash
 
-python3 manage.py collectstatic --noinput
+# Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Upgrade pip
+pip install --upgrade pip
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run migrations
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
+
+# Collect static files
+python manage.py collectstatic --noinput
