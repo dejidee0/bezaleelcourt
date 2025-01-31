@@ -33,7 +33,7 @@ DEBUG = os.getenv('DEBUG')
 
 TEMPLATES_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["'bezaleelcourt-jw87bh0tt-dejidee0s-projects.vercel.app", "bezaleelcourt.vercel.app"]
 
 
 LOGIN_REDIRECT_URL = '/dashboard' 
