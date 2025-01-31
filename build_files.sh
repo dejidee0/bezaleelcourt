@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 
-python3.9 -m venv venv
+# Create and activate virtual environment
+python3 -m venv venv
 source venv/bin/activate
 
-# Upgrade pip
-pip install --upgrade pip
-
 # Install dependencies
+pip install --upgrade pip
 pip install -r requirements.txt
 
-# Run migrations
-python3.9 manage.py makemigrations --noinput
-python3.9 manage.py migrate --noinput
+# Apply migrations
+python3 manage.py makemigrations --noinput
+python3 manage.py migrate --noinput
 
 # Collect static files
-python3.9 manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput
+
+# Ensure the output directory exists
+mkdir -p vercel/output
+
+# Move static files to the output directory (if needed)
+cp -r staticfiles vercel/output/static
+
+# Move your Django app to the output directory
+cp -r * vercel/output/
