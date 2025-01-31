@@ -18,8 +18,8 @@
           "dest": "/static/"
       },
       {
-          "src": "/(.*)",
-          "dest": "server.py"
-      }
+        "src": "/(.*)",
+        "dest": "property/wsgi.py"
+    }
   ]
 }
