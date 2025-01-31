@@ -16,38 +16,7 @@
     <div id="wrapper">
         <div id="pagee" class="clearfix">
             
-                <!-- Mobile Menu  -->
-                <div class="close-btn"><span class="icon flaticon-cancel-1"></span></div>    
-                <div class="mobile-menu">
-                    <div class="menu-backdrop"></div>                            
-                    <nav class="menu-box">
-                        <div class="nav-logo"><a href="index.html"><img src="images/logo/logo%402x.png" alt="nav-logo" width="174" height="44"></a></div>
-                        <div class="bottom-canvas">
-                            <div class="login-box flex align-center">
-                                <a href="#modalLogin" data-bs-toggle="modal">Login</a>
-                                <span>/</span>
-                                <a href="#modalRegister" data-bs-toggle="modal">Register</a>
-                            </div>
-                            <div class="menu-outer"></div>
-                            <div class="button-mobi-sell">
-                                <a class="tf-btn primary" href="add-property.html">Submit Property</a>
-                            </div> 
-                            <div class="mobi-icon-box">
-                                <div class="box d-flex align-items-center">
-                                    <span class="icon icon-phone2"></span>
-                                    <div>1-333-345-6868</div>
-                                </div>
-                                <div class="box d-flex align-items-center">
-                                    <span class="icon icon-mail"></span>
-                                    <div>themesflat@gmail.com</div>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>                
-                </div>
-                <!-- End Mobile Menu -->
-            </header>
-            <!-- End Main Header -->
+            
             <!-- Page Title -->
             <section class="flat-title-page" style="background-image: url('{% static 'images/page-title/page-title-4.jpg' %}');">
                 <div class="container">
@@ -69,7 +38,8 @@
                             <div class="contact-content">
                                 <h4>Drop Us A Line</h4>
                                 <p class="body-2 text-variant-1">Feel free to connect with us through our online channels for updates, news, and more.</p>
-                                <form id="contactform" method="post" action="https://homelengo.vercel.app/contact/contact-process.php" class="form-contact">
+                                <form id="contactform" method="post" action="{% url 'contact' %}" class="form-contact">
+                                    {% csrf_token %}
                                     <div class="box grid-2">
                                         <fieldset>
                                             <label for="name">Full Name:</label>
@@ -97,6 +67,17 @@
                                     <div class="send-wrap">
                                         <button class="tf-btn primary size-1" type="submit">Send Message</button>
                                     </div>
+                                    {% if messages %}
+                                        <div class="messages pt-3">
+                                            {% for message in messages %}
+                                                <div class="alert 
+                                                            {% if message.tags == 'success' %}alert-success{% endif %}
+                                                            {% if message.tags == 'error' %}alert-danger{% endif %}">
+                                                    {{ message }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
                                 </form>
                             </div>
                         </div>

@@ -1,7 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from property.decorators import verified_user_required
 from .models import Property, PropertyImage
+from .forms import ContactForm, DirectContactForm
 from django.contrib import messages
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 def index(request):
@@ -114,6 +118,63 @@ def add_property(request):
 
     return render(request, 'properties/add-property.html', {'user': request.user})
 
+
+def all_properties(request):
+    properties = Property.objects.all()
+
+    # Filtering
+    if 'title' in request.GET and request.GET['title']:
+        properties = properties.filter(title__icontains=request.GET['title'])
+
+    if 'keyword' in request.GET and request.GET['keyword']:
+        properties = properties.filter(description__icontains=request.GET['keyword'])
+
+    # Filter by address
+    if 'address' in request.GET and request.GET['address']:
+        properties = properties.filter(address__icontains=request.GET['address'])
+
+    # Filter by price 
+    if 'price' in request.GET and request.GET['price']:
+        properties = properties.filter(price__gte=request.GET['price'])
+
+    # Filter by bedrooms
+    if 'bedrooms' in request.GET and request.GET['bedrooms']:
+        properties = properties.filter(bedrooms=request.GET['bedrooms'])
+
+    if 'rooms' in request.GET and request.GET['rooms']:
+        properties = properties.filter(rooms=request.GET['rooms'])
+
+
+    # Filter by bathrooms
+    if 'bathrooms' in request.GET and request.GET['bathrooms']:
+        properties = properties.filter(bathrooms=request.GET['bathrooms'])
+
+    # Filter by size 
+    if 'size' in request.GET and request.GET['size']:
+        properties = properties.filter(size__gte=request.GET['size'])
+   
+    # Filter by label 
+    if 'type' in request.GET and request.GET['type']:
+        properties = properties.filter(label=request.GET['type'])
+   
+
+
+    # Pagination
+    page = request.GET.get("page", 1)
+    per_page = request.GET.get("per_page", 10)  # Default to 10 items per page
+
+    paginator = Paginator(properties, per_page)
+
+    try:
+        properties_page = paginator.page(page)
+    except PageNotAnInteger:
+        properties_page = paginator.page(1)
+    except EmptyPage:
+        properties_page = paginator.page(paginator.num_pages)
+
+    return render(request, "properties/all-properties.html", {"properties": properties_page})
+
+
 @verified_user_required
 def my_profile(request):
     user = request.user
@@ -129,7 +190,35 @@ def about(request):
     return render(request, 'properties/about-us.html')
 
 def contact(request):
-    return render(request, 'properties/contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Extract form data
+            name = form.cleaned_data['name']
+            phone = form.cleaned_data['phone']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            
+            # Send the email
+            subject = f'Contact Form Submission from {name}'
+            body = f'Message from {name} ({email} {phone}):\n\n{message}'
+            send_mail(subject, body, email, [settings.DEFAULT_FROM_EMAIL])
+
+            messages.success(request, 'Your enquiry has been successfully submitted. We will get back to you shortly.')
+
+            # You can send a confirmation email to the user as well
+            user_subject = 'Thank you for contacting us'
+            user_body = f'Hello {name},\n\nThank you for your message. We will get back to you shortly.\n\nYour message:\n{message}'
+            send_mail(user_subject, user_body, settings.DEFAULT_FROM_EMAIL, [email])
+        else:
+            messages.error(request, 'There was an error submitting your enquiry. Please try again.')
+
+
+    else:
+        form = ContactForm()
+
+    return render(request, 'properties/contact.html', {'form': form})
 
 def faq(request):
     return render(request, 'properties/faq.html')
@@ -138,5 +227,32 @@ def services(request):
     return render(request, 'properties/our-service.html')
 
 def direct_contact(request):
-    return render(request, 'properties/direct-contact.html')
+    if request.method == 'POST':
+        form = DirectContactForm(request.POST)
+        if form.is_valid():
+            # Process the form data, such as sending an email
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            phone = form.cleaned_data['phone']
+            message = form.cleaned_data['message']
+            
+            # Send the email
+            subject = f'IMPORTANT: Product Enquiry Submitted from {name}'
+            body = f'Message from {name} ({email} {phone}):\n\n{message}'
+            send_mail(subject, body, email, [settings.DEFAULT_FROM_EMAIL])
 
+            messages.success(request, 'Your enquiry has been successfully submitted. We will get back to you shortly.')
+
+            # You can send a confirmation email to the user as well
+            user_subject = 'Thank you for placing your enquiry'
+            user_body = f'Hello {name},\n\nThank you for your message. We will get back to you shortly.\n\nYour message:\n{message}'
+            send_mail(user_subject, user_body, settings.DEFAULT_FROM_EMAIL, [email])
+        else:
+            messages.error(request, 'There was an error submitting your enquiry. Please try again.')
+
+
+    else:
+        form = DirectContactForm()
+
+    return render(request, 'properties/direct-contact.html', {'form': form})

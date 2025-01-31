@@ -102,6 +102,17 @@ DATABASES = {
 }
 
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'  # or your SMTP host (e.g., mailgun, sendgrid)
+EMAIL_PORT = 587  # Typically 587 for TLS or 465 for SSL
+EMAIL_USE_TLS = True  # Enable TLS (True for Gmail)
+EMAIL_HOST_USER = 'your-email@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'your-email-password'  # Your email password or app-specific password
+DEFAULT_FROM_EMAIL = 'webmaster@yourdomain.com'  # Default sender email for 'from' field
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
