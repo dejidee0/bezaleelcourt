@@ -4,7 +4,7 @@
       {
           "src": "build_files.sh",
           "use": "@vercel/static-build",
-          "config": { "distDir": "output" }
+          "config": { "distDir": "vercel/output" }
       },
       {
           "src": "server.py",
