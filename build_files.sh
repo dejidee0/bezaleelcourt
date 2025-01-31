@@ -21,9 +21,9 @@ echo "Creating output directory..."
 mkdir -p vercel/output
 
 echo "Moving static files..."
-cp -r static vercel/output/static
+cp -r staticfiles vercel/output/static  # Ensure 'staticfiles' is correct
 
-echo "Moving Django app files..."
-cp -r * vercel/output/
+echo "Moving Django app files (excluding vercel folder)..."
+rsync -av --progress . vercel/output --exclude=vercel --exclude=venv --exclude=__pycache__
 
 echo "Build script executed successfully."
