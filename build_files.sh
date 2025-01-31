@@ -1,25 +1,29 @@
 #!/usr/bin/env bash
 
-# Create and activate virtual environment
+set -e  # Exit on error
+
+echo "Creating and activating virtual environment..."
 python3 -m venv venv
 source venv/bin/activate
 
-# Install dependencies
+echo "Installing dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Apply migrations
+echo "Applying migrations..."
 python3 manage.py makemigrations --noinput
 python3 manage.py migrate --noinput
 
-# Collect static files
+echo "Collecting static files..."
 python3 manage.py collectstatic --noinput
 
-# Ensure the output directory exists
+echo "Creating output directory..."
 mkdir -p vercel/output
 
-# Move static files to the output directory (if needed)
-cp -r staticfiles vercel/output/static
+echo "Moving static files..."
+cp -r static vercel/output/static
 
-# Move your Django app to the output directory
+echo "Moving Django app files..."
 cp -r * vercel/output/
+
+echo "Build script executed successfully."
