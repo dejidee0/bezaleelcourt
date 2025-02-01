@@ -11,8 +11,15 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
+from cloudinary_storage.storage import MediaCloudinaryStorage
+
 from pathlib import Path
 from dotenv import load_dotenv
+
 
 load_dotenv()  # take environment variables from .env.
 
@@ -33,7 +40,7 @@ DEBUG = os.getenv('DEBUG')
 
 TEMPLATES_DEBUG = True
 
-ALLOWED_HOSTS = ["'bezaleelcourt-jw87bh0tt-dejidee0s-projects.vercel.app", "bezaleelcourt.vercel.app"]
+ALLOWED_HOSTS = ["*"]
 
 
 LOGIN_REDIRECT_URL = '/dashboard' 
@@ -41,6 +48,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
+# Default storage settings
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Application definition
 
@@ -52,6 +61,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'cloudinary',
+    'cloudinary_storage',
 
     'users',
     'home',

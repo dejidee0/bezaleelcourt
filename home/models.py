@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 import random
 import string
+from cloudinary.models import CloudinaryField
 
 
 def generate_property_id():
@@ -59,7 +60,7 @@ class Property(models.Model):
     
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='property_images/')
+    image = CloudinaryField(upload_to='property_images/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
