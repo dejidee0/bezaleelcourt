@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 import random
 import string
-from cloudinary.models import CloudinaryField
 
 
 def generate_property_id():
