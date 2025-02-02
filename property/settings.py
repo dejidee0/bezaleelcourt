@@ -40,6 +40,10 @@ ALLOWED_HOSTS = ['*']
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
+# Debug log to check if variables are being loaded
+print("SUPABASE_URL:", SUPABASE_URL)
+print("SUPABASE_KEY:", SUPABASE_KEY)
+
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 LOGIN_REDIRECT_URL = '/dashboard' 
