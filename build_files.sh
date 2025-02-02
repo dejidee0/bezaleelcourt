@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
 
-echo "Build script starts executing..."
-# exit on error
-set -o errexit
-# pip install -r requirements.txt
-# python manage.py collectstatic --no-input
-# python manage.py collectstatic --noinput
+set -e  # Exit on error
 
-# python manage.py migrate
-# echo "Build script executed successfully."
-
+echo "Creating and activating virtual environment..."
+python3 -m venv venv
+source venv/bin/activate
 
 echo "Installing dependencies..."
 pip install --upgrade pip
@@ -23,10 +18,10 @@ echo "Collecting static files..."
 python3 manage.py collectstatic --noinput
 
 echo "Creating output directory..."
-mkdir -p render/output
+mkdir -p vercel/output
 
 echo "Moving static files..."
-cp -r staticfiles render/output/static  # Ensure 'staticfiles' is correct
+cp -r staticfiles vercel/output/static  # Ensure 'staticfiles' is correct
 
 
 echo "Build script executed successfully."
