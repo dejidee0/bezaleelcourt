@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from supabase import create_client
 
 
 load_dotenv()  # take environment variables from .env.
@@ -38,7 +39,8 @@ ALLOWED_HOSTS = ['*']
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-DEFAULT_FILE_STORAGE = "property.storage_backends.SupabaseMediaStorage"
+
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 LOGIN_REDIRECT_URL = '/dashboard' 
 LOGOUT_REDIRECT_URL = '/'

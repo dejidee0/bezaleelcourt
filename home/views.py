@@ -1,6 +1,6 @@
 import uuid
 import os
-from django.conf import settings
+from property import settings
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -8,12 +8,9 @@ from property.decorators import verified_user_required
 from .models import Property, PropertyImage
 from .forms import ContactForm, DirectContactForm
 from django.contrib import messages
-from django.conf import settings
 from django.core.mail import send_mail
-from supabase import create_client
 
 
-supabase = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
 SUPABASE_STORAGE_BUCKET = "media"
 
 
@@ -116,9 +113,9 @@ def add_property(request):
             if images:
                 for image in images:
                     file_name = f"property/{uuid.uuid4()}_{image.name}"
-                    response = supabase.storage.from_(SUPABASE_STORAGE_BUCKET).upload(file_name, image.read())
+                    response = settings.supabase.storage.from_(SUPABASE_STORAGE_BUCKET).upload(file_name, image.read())
 
-                    file_url = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_STORAGE_BUCKET}/{file_name}"
+                    file_url = f"{settings.SUPABASE_URL}/storage/v1/object/public/{SUPABASE_STORAGE_BUCKET}/{file_name}"
 
                     PropertyImage.objects.create(property=property_instance, image=file_url)
 
