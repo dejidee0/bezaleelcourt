@@ -33,8 +33,16 @@ DEBUG = os.getenv('DEBUG')
 
 TEMPLATES_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': os.getenv('CLOUD_NAME'),
+#     'API_KEY': os.getenv('API_KEY'),
+#     'API_SECRET': os.getenv('API_SECRET')
+# }
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = "property.storage_backends.SupabaseMediaStorage"
 
 LOGIN_REDIRECT_URL = '/dashboard' 
 LOGOUT_REDIRECT_URL = '/'
@@ -55,10 +63,12 @@ INSTALLED_APPS = [
 
     'users',
     'home',
+
+    # 'cloudinary_storage',
+    # 'cloudinary',
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -100,23 +110,23 @@ WSGI_APPLICATION = 'property.wsgi.app'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv("DB_NAME"),
+#         "USER": os.getenv("DB_USER"),
+#         "PASSWORD": os.getenv("DB_PASSWORD"),
+#         "HOST": os.getenv("DB_HOST"),
+#         "PORT": os.getenv("DB_PORT"),
+#     }
+# }
 
 
 # JAZZMIN_SETTINGS = {

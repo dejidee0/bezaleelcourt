@@ -168,7 +168,7 @@
                                             <div class="images-style">
                                                 {% with property.images.first as first_image %}
                                                     {% if first_image %}
-                                                        <img class="lazyload" data-src="{{ first_image.image.url }}" src="{{ first_image.image.url }}" alt="Property Image">                                                   
+                                                        <img class="lazyload" data-src="{{ first_image.image }}" src="{{ first_image.image }}" alt="Property Image">                                                   
                                                     {% endif %}
                                                 {% endwith %}                                            
                                             </div>
@@ -214,7 +214,7 @@
                                         <div class="content-bottom">
                                             <div class="d-flex gap-8 align-items-center">
                                                 <div class="avatar avt-40 round">
-                                                    <img src="{{property.agent.profile_picture.url}}" alt="avt">
+                                                    <img src="{{property.agent.profile_picture}}" alt="avt">
                                                 </div>
                                                 <span>{{property.agent.first_name}} {{property.agent.last_name}}</span>
                                             </div>

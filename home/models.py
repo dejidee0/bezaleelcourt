@@ -59,7 +59,7 @@ class Property(models.Model):
     
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='property_images/')
+    image =  models.CharField(max_length=500, blank=True, null=True)  # Stores Supabase file URL
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

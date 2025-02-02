@@ -19,7 +19,7 @@
       },
       {
           "src": "/(.*)",
-          "dest": "server.py"
+          "dest": "property/wsgi.py"
       }
   ]
 }

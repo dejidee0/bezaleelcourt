@@ -1,16 +1,16 @@
+import os
+import uuid
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import user_passes_test
-from .models import CustomUser
+from supabase import create_client
 from django.contrib import messages
-from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
-from .forms import CustomLoginForm
 from django.contrib.auth import authenticate, login
+from .models import CustomUser
 
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+SUPABASE_STORAGE_BUCKET = "media"
 
-def is_admin(user):
-    return user.is_authenticated and user.is_staff  # Only allow staff/admin users
-
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def register(request):
     if request.method == 'POST':
@@ -24,6 +24,20 @@ def register(request):
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
 
+        file_url = None  # Default to None if no image is uploaded
+
+        if profile_picture:
+            # Generate a unique file name
+            file_name = f"profiles/{uuid.uuid4()}_{profile_picture.name}"
+
+            # Upload to Supabase Storage
+            response = supabase.storage.from_(SUPABASE_STORAGE_BUCKET).upload(file_name, profile_picture.read())
+
+
+            # Generate public URL
+            file_url = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_STORAGE_BUCKET}/{file_name}"
+
+        # Validate Password
         if password == confirm_password:
             if CustomUser.objects.filter(username=email).exists():
                 messages.error(request, 'Email already exists.')
@@ -34,7 +48,7 @@ def register(request):
                     first_name=first_name,
                     last_name=last_name,
                     phone_number=phone_number,
-                    profile_picture=profile_picture,
+                    profile_picture=file_url,  # Save the Supabase image URL
                     address=address,
                     bio=bio,
                     username=email,
