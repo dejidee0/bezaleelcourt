@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from supabase import create_client
+from django.core.management import call_command
 
 
 load_dotenv()  # take environment variables from .env.
@@ -50,6 +51,10 @@ LOGIN_REDIRECT_URL = '/dashboard'
 LOGOUT_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+
+if os.getenv('DJANGO_SUPERUSER_USERNAME') and os.getenv('DJANGO_SUPERUSER_PASSWORD'):
+    call_command('createsuperuser', interactive=False)
 
 # Application definition
 
