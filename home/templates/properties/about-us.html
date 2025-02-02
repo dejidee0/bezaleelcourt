@@ -1,5 +1,7 @@
 {% extends 'properties/base.html' %}
 
+{% load static %}
+
 {% block title %}About Us{% endblock %}
 
 {% block content %}
@@ -96,10 +98,10 @@
                             </a>
             
                             <div class="box-img item1 ani5">
-                                <img src="images/banner/item1.jpg" alt="Property image 1">
+                                <img src="{% static 'images/banner/item1.jpg' %}" alt="Property image 1">
                             </div>
                             <div class="box-img item2 ani4">
-                                <img src="images/banner/item2.jpg" alt="Property image 2">
+                                <img src="{% static 'images/banner/item2.jpg' %}" alt="Property image 2">
                             </div>
                         </div>
                     </div>
