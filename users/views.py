@@ -1,16 +1,15 @@
 import os
 import uuid
+from django.conf import settings
 from django.shortcuts import render, redirect
 from supabase import create_client
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from .models import CustomUser
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-SUPABASE_STORAGE_BUCKET = "media"
 
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+supabase = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+SUPABASE_STORAGE_BUCKET = "media"
 
 def register(request):
     if request.method == 'POST':

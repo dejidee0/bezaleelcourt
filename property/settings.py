@@ -36,6 +36,8 @@ TEMPLATES_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 DEFAULT_FILE_STORAGE = "property.storage_backends.SupabaseMediaStorage"
 
 LOGIN_REDIRECT_URL = '/dashboard' 

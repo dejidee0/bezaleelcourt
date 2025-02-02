@@ -1,5 +1,6 @@
 import uuid
 import os
+from django.conf import settings
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -11,11 +12,10 @@ from django.conf import settings
 from django.core.mail import send_mail
 from supabase import create_client
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+supabase = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
 SUPABASE_STORAGE_BUCKET = "media"
 
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 def index(request):
     properties = Property.objects.all()
