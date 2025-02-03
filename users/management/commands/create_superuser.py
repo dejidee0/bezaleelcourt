@@ -1,12 +1,18 @@
-from django.core.management import call_command
-from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
+from django.contrib.auth import get_user_model
 
-def create_superuser():
-    try:
-        User.objects.create_superuser('admin', 'admin@gmail.com', 'bezaleelcourt12345@')
-        print("Superuser created successfully!")
-    except Exception as e:
-        print(f"Error creating superuser: {e}")
+User = get_user_model()
 
-if __name__ == '__main__':
-    create_superuser()
+class Command(BaseCommand):
+    help = 'Create a superuser if none exists'
+
+    def handle(self, *args, **options):
+        if not User.objects.filter(username='admin').exists():
+            User.objects.create_superuser(
+                username='admin',
+                email='admin@gmail.com',
+                password='bezaleelcourt12345@'
+            )
+            self.stdout.write(self.style.SUCCESS('Superuser created successfully!'))
+        else:
+            self.stdout.write(self.style.WARNING('Superuser already exists.'))
