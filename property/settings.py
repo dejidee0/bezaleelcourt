@@ -39,12 +39,11 @@ ALLOWED_HOSTS = ['*']
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
-
-# Debug log to check if variables are being loaded
-print("SUPABASE_URL:", SUPABASE_URL)
-print("SUPABASE_KEY:", SUPABASE_KEY)
+SUPABASE_STORAGE_BUCKET = "media"
 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+DEFAULT_FILE_STORAGE = "property.storage_backend.SupabaseStorage"
+
 
 LOGIN_REDIRECT_URL = '/dashboard' 
 LOGOUT_REDIRECT_URL = '/'
@@ -204,15 +203,16 @@ DATABASES = {
 #     "dark_mode_theme": "darkly",
 # }
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-EMAIL_HOST = 'smtp.gmail.com'  # or your SMTP host (e.g., mailgun, sendgrid)
+EMAIL_HOST = 'smtp.mandrillapp.com'
 EMAIL_PORT = 587  # Typically 587 for TLS or 465 for SSL
-EMAIL_USE_TLS = True  # Enable TLS (True for Gmail)
-EMAIL_HOST_USER = 'your-email@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = 'your-email-password'  # Your email password or app-specific password
-DEFAULT_FROM_EMAIL = 'webmaster@yourdomain.com'  # Default sender email for 'from' field
+EMAIL_USE_TLS = True  # Enable TLS (recommended)
+EMAIL_USE_SSL = False  # Should be False if using TLS
+EMAIL_HOST_USER = 'Bezaleelcourt'  # Your email address
+EMAIL_HOST_PASSWORD = os.getenv('MAILCHIMP_API_KEY')  # Your email password or app-specific password
+DEFAULT_FROM_EMAIL = 'info@bezaleelcourt.com'  # Default sender email for 'from' field
 
 
 # Password validation

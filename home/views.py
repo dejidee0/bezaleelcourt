@@ -1,6 +1,5 @@
-import uuid
-import os
 from property import settings
+from property.settings import SUPABASE_STORAGE_BUCKET
 
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -9,9 +8,6 @@ from .models import Property, PropertyImage
 from .forms import ContactForm, DirectContactForm
 from django.contrib import messages
 from django.core.mail import send_mail
-
-
-SUPABASE_STORAGE_BUCKET = "media"
 
 
 def index(request):
@@ -112,12 +108,8 @@ def add_property(request):
             # Save images (if provided)
             if images:
                 for image in images:
-                    file_name = f"property/{uuid.uuid4()}_{image.name}"
-                    response = settings.supabase.storage.from_(SUPABASE_STORAGE_BUCKET).upload(file_name, image.read())
 
-                    file_url = f"{settings.SUPABASE_URL}/storage/v1/object/public/{SUPABASE_STORAGE_BUCKET}/{file_name}"
-
-                    PropertyImage.objects.create(property=property_instance, image=file_url)
+                    PropertyImage.objects.create(property=property_instance, image=images)
 
             # Success message
             messages.success(request, 'Property added successfully!')
@@ -215,8 +207,8 @@ def contact(request):
             
             # Send the email
             subject = f'Contact Form Submission from {name}'
-            body = f'Message from {name} ({email} {phone}):\n\n{message}'
-            send_mail(subject, body, email, [settings.DEFAULT_FROM_EMAIL])
+            body = f'Message from {name} ({email}, {phone}):\n\n{message}'
+            send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])
 
             messages.success(request, 'Your enquiry has been successfully submitted. We will get back to you shortly.')
 
@@ -252,8 +244,8 @@ def direct_contact(request):
             
             # Send the email
             subject = f'IMPORTANT: Product Enquiry Submitted from {name}'
-            body = f'Message from {name} ({email} {phone}):\n\n{message}'
-            send_mail(subject, body, email, [settings.DEFAULT_FROM_EMAIL])
+            body = f'Message from {name} ({email}, {phone}):\n\n{message}'
+            send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [settings.DEFAULT_FROM_EMAIL])
 
             messages.success(request, 'Your enquiry has been successfully submitted. We will get back to you shortly.')
 

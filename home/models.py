@@ -1,7 +1,10 @@
-from django.db import models
-from django.conf import settings
 import random
 import string
+
+from django.core.files.storage import default_storage
+from django.db import models
+from django.conf import settings
+from property.storage_backend import SupabaseStorage
 
 
 def generate_property_id():
@@ -16,10 +19,16 @@ class Property(models.Model):
     ]
 
     LABEL_CHOICES = [
-        ('land_to_sell', 'land_to_sell'),
-        # ('short_let', 'Short Let'),
-        # ('long_let', 'Long Let'),
-        ('building_to_sell', 'building_to_sell'),
+        ('commercial_land', 'Commercial Land'),
+        ('office_space', 'Office Space'),
+        ('residential_land', 'Residential Land'),
+        ('apartments', 'Apartments'),
+        ('bungalows', 'Bungalows'),
+        ('fully_detached_duplexes', 'Fully Detached Duplexes'),
+        ('semi_detached_duplexes', 'Semi Detached Duplexes'),
+        ('terrace_duplexes', 'Terrace Duplexes'),
+        ('maisonettes', 'Maisonettes'),
+        ('penthouses', 'Penthouses'),
     ]
 
     id = models.CharField(
@@ -50,7 +59,7 @@ class Property(models.Model):
         on_delete=models.CASCADE, 
         related_name='properties'
     )
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', blank=True, null=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='approved', blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -59,7 +68,7 @@ class Property(models.Model):
     
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE, related_name='images')
-    image =  models.CharField(max_length=500, blank=True, null=True)  # Stores Supabase file URL
+    image = models.ImageField(storage=default_storage, upload_to="properties/") # Stores Supabase file URL
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

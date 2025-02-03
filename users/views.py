@@ -1,6 +1,7 @@
 import os
 import uuid
 from property import settings
+from property.settings import SUPABASE_STORAGE_BUCKET
 
 from django.shortcuts import render, redirect
 from supabase import create_client
@@ -9,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from .models import CustomUser
 
 
-SUPABASE_STORAGE_BUCKET = "media"
+
 
 def register(request):
     if request.method == 'POST':
@@ -23,19 +24,6 @@ def register(request):
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
 
-        file_url = None  # Default to None if no image is uploaded
-
-        if profile_picture:
-            # Generate a unique file name
-            file_name = f"profiles/{uuid.uuid4()}_{profile_picture.name}"
-
-            # Upload to Supabase Storage
-            response = settings.supabase.storage.from_(SUPABASE_STORAGE_BUCKET).upload(file_name, profile_picture.read())
-
-
-            # Generate public URL
-            file_url = f"{settings.SUPABASE_URL}/storage/v1/object/public/{SUPABASE_STORAGE_BUCKET}/{file_name}"
-
         # Validate Password
         if password == confirm_password:
             if CustomUser.objects.filter(username=email).exists():
@@ -47,7 +35,7 @@ def register(request):
                     first_name=first_name,
                     last_name=last_name,
                     phone_number=phone_number,
-                    profile_picture=file_url,  # Save the Supabase image URL
+                    profile_picture=profile_picture,  # Save the Supabase image URL
                     address=address,
                     bio=bio,
                     username=email,
