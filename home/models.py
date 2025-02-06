@@ -53,7 +53,7 @@ class Property(models.Model):
     year_built = models.PositiveIntegerField(blank=True, null=True)  # Year built
     video_url = models.URLField(blank=True, null=True)  # Optional video tour link
 
-    price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    price = models.CharField(max_length=50, blank=True, null=True)
     agent = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE, 
