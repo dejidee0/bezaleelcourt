@@ -72,4 +72,4 @@ class PropertyImage(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Image for {self.property.title}"
+        return f"Image for {self.property.title if self.property.title else "Unknown Property"}"

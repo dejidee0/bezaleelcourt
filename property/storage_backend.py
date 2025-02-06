@@ -11,30 +11,41 @@ class SupabaseStorage(Storage):
         self.bucket = settings.SUPABASE_STORAGE_BUCKET
 
     def _open(self, name, mode="rb"):
-        response = self.client.storage.from_(self.bucket).download(name)
-        return response
+        try:
+            response = self.client.storage.from_(self.bucket).download(name)
+            return BytesIO(response)  # Convert to file-like object
+        except Exception as e:
+            raise FileNotFoundError(f"File not found in Supabase: {name}") from e
 
     def _save(self, name, content):
         file_data = content.read()  # Read file as bytes
         directory, filename = name.rsplit("/", 1)
 
+        # Generate unique filename
         new_filename = f"{filename.split('.')[0]}_{uuid.uuid4()}.{filename.split('.')[-1]}"
         new_name = f"{directory}/{new_filename}"
 
+        # Determine content type (MIME type)
+        content_type, _ = mimetypes.guess_type(filename)
+        if not content_type:
+            content_type = "application/octet-stream"  # Default MIME type
+
         # Upload to Supabase
         response = self.client.storage.from_(self.bucket).upload(
-            path=new_name,  # File path in storage
-            file=file_data,  # Pass BytesIO object
-            file_options={"content-type": content.content_type}
+            path=new_name,
+            file=file_data,  # File in bytes
+            file_options={"content-type": content_type}
         )
 
         if not response:
             raise ValueError("File upload failed.")
 
-        return self.url(name=new_name)
-    
+        return new_name  # Return stored filename
+
     def exists(self, name):
-        files = self.client.storage.from_(self.bucket).list()
+        directory = "/".join(name.split("/")[:-1])  # Extract directory
+        files = self.client.storage.from_(self.bucket).list(path=directory)  # List only relevant files
+
         return any(file['name'] == name for file in files)
 
     def url(self, name):

@@ -168,7 +168,7 @@
                                             <div class="images-style">
                                                 {% with property.images.first as first_image %}
                                                     {% if first_image %}
-                                                        <img class="lazyload" data-src="{{ first_image.image }}" src="{{ first_image.image }}" alt="Property Image">                                                   
+                                                        <img class="lazyload" data-src="{{ first_image.image.url }}" src="{{ first_image.image.url }}" alt="Property Image">                                                   
                                                     {% endif %}
                                                 {% endwith %}                                            
                                             </div>

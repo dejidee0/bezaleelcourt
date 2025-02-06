@@ -19,7 +19,7 @@ class CustomUser(AbstractUser):
     is_verified = models.BooleanField(default=False)  # User verification status
     phone_number = models.CharField(max_length=15, blank=False, null=False)  # Optional phone number
     address = models.TextField(blank=True, null=True)  # Optional address field
-    profile_picture = models.ImageField(storage=default_storage, upload_to="profiles/")  # Stores Supabase file URL
+    profile_picture = models.ImageField(storage=default_storage, upload_to="profiles/", blank=True, null=True)  # Stores Supabase file URL
     bio = models.TextField(blank=True, null=True)  # Optional bio field
     
     def __str__(self):

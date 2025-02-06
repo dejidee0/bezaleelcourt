@@ -87,7 +87,7 @@
                         {% for image in images %}
                         <div class="swiper-slide">
                             <a href="{{ image.image }}" data-fancybox="gallery" class="box-img-detail d-block">
-                                <img src="{{ image.image }}" alt="img-property">
+                                <img src="{{ image.image.url }}" alt="img-property">
                             </a>
                         </div>
                         {% endfor %}
@@ -168,7 +168,7 @@
                                 <div class="img-video">
                                     {% with property.images.first as first_image %}
                                         {% if first_image %}
-                                            <img class="lazyload w-5 h-5" data-src="{{ first_image.image }}" src="{{ first_image.image }}" alt="Property Image">
+                                            <img class="lazyload w-5 h-5" data-src="{{ first_image.image.url }}" src="{{ first_image.image.url }}" alt="Property Image">
                                         {% else %}
                                             <img src="{% static 'default-image.jpg' %}" alt="No Image Available">
                                         {% endif %}
