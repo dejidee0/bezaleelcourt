@@ -126,6 +126,7 @@ def add_property(request):
 
 def all_properties(request):
     properties = Property.objects.all()
+    latest = Property.objects.order_by('-created_at')[:4]
 
     # Filtering
     if 'title' in request.GET and request.GET['title']:
@@ -166,7 +167,7 @@ def all_properties(request):
 
     # Pagination
     page = request.GET.get("page", 1)
-    per_page = request.GET.get("per_page", 10)  # Default to 10 items per page
+    per_page = request.GET.get("per_page", 6)  # Default to 10 items per page
 
     paginator = Paginator(properties, per_page)
 
@@ -177,7 +178,7 @@ def all_properties(request):
     except EmptyPage:
         properties_page = paginator.page(paginator.num_pages)
 
-    return render(request, "properties/all-properties.html", {"properties": properties_page})
+    return render(request, "properties/all-properties.html", {"properties": properties_page, "latest": latest,})
 
 
 @verified_user_required

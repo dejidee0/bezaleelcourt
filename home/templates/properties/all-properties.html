@@ -318,53 +318,53 @@
                                                                         <div class="group-amenities">
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb1" checked> 
-                                                                                <label for="cb1" class="text-cb-amenities">Air Condition</label>
+                                                                                <label for="cb1" class="text-cb-amenities"> Fitted Kitchen with accessories</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb2"> 
-                                                                                <label for="cb2" class="text-cb-amenities">Disabled Access</label>
+                                                                                <label for="cb2" class="text-cb-amenities">Modern Day POP Ceiling</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb3"> 
-                                                                                <label for="cb3" class="text-cb-amenities">Ceiling Height</label>
+                                                                                <label for="cb3" class="text-cb-amenities">Detailed finishing</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb4" checked> 
-                                                                                <label for="cb4" class="text-cb-amenities">Floor</label>
+                                                                                <label for="cb4" class="text-cb-amenities">Luxury Finishing</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb5"> 
-                                                                                <label for="cb5" class="text-cb-amenities">Heating</label>
+                                                                                <label for="cb5" class="text-cb-amenities">Jacuzzi</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb6"> 
-                                                                                <label for="cb6" class="text-cb-amenities">Renovation</label>
+                                                                                <label for="cb6" class="text-cb-amenities">CCTV</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb7"> 
-                                                                                <label for="cb7" class="text-cb-amenities">Window Type</label>
+                                                                                <label for="cb7" class="text-cb-amenities">Swimming Pool</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb8"> 
-                                                                                <label for="cb8" class="text-cb-amenities">Cable TV</label>
+                                                                                <label for="cb8" class="text-cb-amenities">Automated Light</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb9" checked> 
-                                                                                <label for="cb9" class="text-cb-amenities">Elevator</label>
+                                                                                <label for="cb9" class="text-cb-amenities">Water heater</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb10"> 
-                                                                                <label for="cb10" class="text-cb-amenities">Furnishing</label>
+                                                                                <label for="cb10" class="text-cb-amenities">Heat extractor</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb11"> 
-                                                                                <label for="cb11" class="text-cb-amenities">Intercom</label>
+                                                                                <label for="cb11" class="text-cb-amenities">Ample parking space</label>
                                                                             </fieldset>
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb12"> 
-                                                                                <label for="cb12" class="text-cb-amenities">Security</label>
+                                                                                <label for="cb12" class="text-cb-amenities">Cinema-</label>
                                                                             </fieldset>
-                                                                            <fieldset class="amenities-item">
+                                                                            <!-- <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb13"> 
                                                                                 <label for="cb13" class="text-cb-amenities">Search property</label>
                                                                             </fieldset>
@@ -411,7 +411,7 @@
                                                                             <fieldset class="amenities-item">
                                                                                 <input type="checkbox" class="tf-checkbox style-1" id="cb24"> 
                                                                                 <label for="cb24" class="text-cb-amenities">WiFi</label>
-                                                                            </fieldset>
+                                                                            </fieldset> -->
                                                                         </div>
                                                                         
                                                                     </div>
@@ -432,7 +432,7 @@
                                 <div class="widget-box box-latest-property">
                                     <h5 class="fw-6 title">Latest Propeties</h5>
                                     <ul>
-                                        {% for property in properties %}
+                                        {% for property in latest %}
                                         <li class="latest-property-item">
                                             <a href="{% url 'property_detail' property_id=property.id %}" class="images-style">
                                                 {% with property.images.first as first_image %}
@@ -501,14 +501,14 @@
                                                                 <path d="M10 7C10 7.53043 9.78929 8.03914 9.41421 8.41421C9.03914 8.78929 8.53043 9 8 9C7.46957 9 6.96086 8.78929 6.58579 8.41421C6.21071 8.03914 6 7.53043 6 7C6 6.46957 6.21071 5.96086 6.58579 5.58579C6.96086 5.21071 7.46957 5 8 5C8.53043 5 9.03914 5.21071 9.41421 5.58579C9.78929 5.96086 10 6.46957 10 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                                 <path d="M13 7C13 11.7613 8 14.5 8 14.5C8 14.5 3 11.7613 3 7C3 5.67392 3.52678 4.40215 4.46447 3.46447C5.40215 2.52678 6.67392 2 8 2C9.32608 2 10.5979 2.52678 11.5355 3.46447C12.4732 4.40215 13 5.67392 13 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                                                            145 Brooklyn Ave, Califonia, New York   
+                                                            {{property.address}}  
                                                         </div>
                                                     </a>
                                                     
                                                 </div>
                                                 <div class="archive-bottom">
                                                     <div class="content-top">
-                                                        <h6 class="text-capitalize"><a href="property-details-v1.html" class="link"> Casa Lomas de Machalí Machas</a></h6>
+                                                        <h6 class="text-capitalize"><a href="{% url 'property_detail' property_id=property.id %}" class="link">{{property.title}}</a></h6>
                                                             <ul class="meta-list">
                                                                 <li class="item">
                                                                     <i class="icon icon-bed"></i>
