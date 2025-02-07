@@ -31,6 +31,12 @@ class Property(models.Model):
         ('penthouses', 'Penthouses'),
     ]
 
+    PROPERTY_TYPE_CHOICES = [
+        ('Villa', 'Villa'),
+        ('Studio', 'Sudio'),
+        ('Office', 'Office')
+    ]
+
     id = models.CharField(
         max_length=8, 
         primary_key=True, 
@@ -52,6 +58,7 @@ class Property(models.Model):
     bathrooms = models.PositiveIntegerField(blank=True, null=True)
     year_built = models.PositiveIntegerField(blank=True, null=True)  # Year built
     video_url = models.URLField(blank=True, null=True)  # Optional video tour link
+    Property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES, default='Villa', blank=True, null=True)
 
     price = models.CharField(max_length=50, blank=True, null=True)
     agent = models.ForeignKey(
