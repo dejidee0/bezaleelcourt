@@ -15,5 +15,6 @@ urlpatterns = [
     path('direct-contact/', direct_contact, name='direct_contact'),
     path('property-detail/<str:property_id>/', property_detail, name='property_detail'),
     path('properties/', all_properties, name='all_properties'),
+    path('category/<str:category>/', category_properties, name='category'),
 
 ]

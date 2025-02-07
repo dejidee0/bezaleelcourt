@@ -37,6 +37,19 @@ class Property(models.Model):
         ('Office', 'Office')
     ]
 
+    CATEGORY_CHOICES = [
+        ("commercial_land", "Commercial Land"),
+        ("office_space", "Office Space"),
+        ("residential_land", "Residential Land"),
+        ("apartments", "Apartments"),
+        ("bungalows", "Bungalows"),
+        # ("fully_detached_duplex", "Fully Detached Duplexes"),
+        ("semi_detached_duplex", "Semi-Detached Duplexes"),
+        ("terrace_duplex", "Terrace Duplexes"),
+        ("maisonettes", "Maisonettes"),
+        ("penthouses", "Penthouses"),
+    ]
+
     id = models.CharField(
         max_length=8, 
         primary_key=True, 
@@ -59,6 +72,9 @@ class Property(models.Model):
     year_built = models.PositiveIntegerField(blank=True, null=True)  # Year built
     video_url = models.URLField(blank=True, null=True)  # Optional video tour link
     Property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES, default='Villa', blank=True, null=True)
+    category = models.CharField(
+        max_length=50, choices=CATEGORY_CHOICES, default="apartments"
+    )
 
     price = models.CharField(max_length=50, blank=True, null=True)
     agent = models.ForeignKey(

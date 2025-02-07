@@ -262,3 +262,35 @@ def direct_contact(request):
         form = DirectContactForm()
 
     return render(request, 'properties/direct-contact.html', {'form': form})
+
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+from .models import Property
+
+def category_properties(request, category):
+    if request.method == "GET":
+        # Filter properties by category and approved status
+        properties = Property.objects.filter(category=category, status="approved")
+
+        # Convert queryset to list of dicts (not needed unless JSON response is required)
+        property_list = list(properties.values())
+
+        print(f"Length is {len(property_list)}")  # Fixed length() method error
+
+        if len(property_list) > 0:
+            page = request.GET.get("page", 1)
+            per_page = request.GET.get("per_page", 12)  # Default to 12 items per page
+
+            paginator = Paginator(properties, per_page)
+
+            try:
+                properties_page = paginator.page(page)
+            except PageNotAnInteger:
+                properties_page = paginator.page(1)
+            except EmptyPage:
+                properties_page = paginator.page(paginator.num_pages)
+
+            return render(request, "properties/category.html", {"properties": properties_page})
+
+    return render(request, "properties/category.html")
