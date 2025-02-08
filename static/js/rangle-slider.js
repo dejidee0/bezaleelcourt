@@ -9,14 +9,14 @@ $(document).ready(function () {
   var moneyFormat = wNumb({
     decimals: 0,
     thousand: ",",
-    prefix: "$",
+    prefix: "₦",
   });
   noUiSlider.create(rangeSlider, {
-    start: [100, 650000],
+    start: [100000, 100000000],
     step: 1,
     range: {
-      min: [100],
-      max: [650000],
+      min: [100000],
+      max: [100000000],
     },
     format: moneyFormat,
     connect: true,
@@ -72,14 +72,14 @@ $(document).ready(function () {
     var moneyFormat = wNumb({
       decimals: 0,
       thousand: ",",
-      prefix: "$",
+      prefix: "₦",
     });
     noUiSlider.create(rangeSlider, {
-      start: [100, 650000],
+      start: [100000, 100000000],
       step: 1,
       range: {
-        min: [100],
-        max: [650000],
+        min: [100000],
+        max: [100000000],
       },
       format: moneyFormat,
       connect: true,

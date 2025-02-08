@@ -43,7 +43,7 @@ class Property(models.Model):
         ("residential_land", "Residential Land"),
         ("apartments", "Apartments"),
         ("bungalows", "Bungalows"),
-        # ("fully_detached_duplex", "Fully Detached Duplexes"),
+        ("fully_detached_duplex", "Fully Detached Duplexes"),
         ("semi_detached_duplex", "Semi-Detached Duplexes"),
         ("terrace_duplex", "Terrace Duplexes"),
         ("maisonettes", "Maisonettes"),
