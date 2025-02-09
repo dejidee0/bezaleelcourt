@@ -400,7 +400,7 @@
 
                         <li>
                           <a
-                            href="{% url 'contact' %}"
+                            href="{% url 'direct_contact' %}"
                             class="caption-1 text-variant-2"
                             >Contact Us</a
                           >
@@ -418,28 +418,28 @@
                       <ul class="mt-10 navigation-menu-footer">
                         <li>
                           <a
-                            href="topmap-list.html"
+                            href="{% url 'all_properties' %}"
                             class="caption-1 text-variant-2"
                             >Property For Sale</a
                           >
                         </li>
                         <li>
                           <a
-                            href="topmap-grid.html"
+                            href="{% url 'all_properties' %}"
                             class="caption-1 text-variant-2"
                             >Property For Rent</a
                           >
                         </li>
                         <li>
                           <a
-                            href="topmap-grid.html"
+                            href="{% url 'all_properties' %}"
                             class="caption-1 text-variant-2"
                             >Property For Buy</a
                           >
                         </li>
                         <li>
                           <a
-                            href="topmap-grid.html"
+                            href="{% url 'all_properties' %}"
                             class="caption-1 text-variant-2"
                             >Our Agents</a
                           >
@@ -510,10 +510,10 @@
                 </div>
 
                 <ul class="menu-bottom">
-                  <li><a href="our-service.html">Terms Of Services</a></li>
+                  <li><a href="{% url 'services' %}">Terms Of Services</a></li>
 
-                  <li><a href="pricing.html">Privacy Policy</a></li>
-                  <li><a href="contact.html">Cookie Policy</a></li>
+                  <!-- <li><a href="pricing.html">Privacy Policy</a></li> -->
+                  <li><a href="{% url 'direct_contact' %}">Cookie Policy</a></li>
                 </ul>
               </div>
             </div>

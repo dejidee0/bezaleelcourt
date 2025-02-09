@@ -362,7 +362,7 @@
                                     </div>
                                     <div class="archive-bottom">
                                         <div class="content-top">
-                                            <h6 class="text-capitalize"><a href="property-details-v1.html" class="link">{{ property.title }}</a></h6>
+                                            <h6 class="text-capitalize"><a href="{% url 'property_detail' property_id=property.id %}" class="link">{{ property.title }}</a></h6>
                                             <p>{{ property.description|slice:":100" }}...</p>
                                             <ul class="meta-list">
                                                 <li class="item">
@@ -425,7 +425,7 @@
                     <div class="content">
                         <h5 class="title">Buy A New Home</h5>
                         <p class="description">Discover your dream home effortlessly. Explore diverse properties and expert guidance for a seamless buying experience.</p>
-                        <a href="sidebar-grid.html" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
+                        <a href="{% url 'about' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
                     </div>
                 </div>
                 <div class="box-service">
@@ -435,7 +435,7 @@
                     <div class="content">
                         <h5 class="title">Sell a home</h5>
                         <p class="description">Sell confidently with expert guidance and effective strategies, showcasing your property's best features for a successful sale.</p>
-                        <a href="sidebar-grid.html" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
+                        <a href="{% url 'about' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
                     </div>
                 </div>
                 <div class="box-service">
@@ -445,7 +445,7 @@
                     <div class="content">
                         <h5 class="title">Rent a home</h5>
                         <p class="description">Discover your perfect rental effortlessly. Explore a diverse variety of listings tailored precisely to suit your unique lifestyle needs.</p>
-                        <a href="sidebar-grid.html" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
+                        <a href="{% url 'about' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
                     </div>
                 </div>
             </div>

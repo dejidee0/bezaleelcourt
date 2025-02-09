@@ -21,17 +21,17 @@
                 <div class="mobile-menu">
                     <div class="menu-backdrop"></div>                            
                     <nav class="menu-box">
-                        <div class="nav-logo"><a href="index.html"><img src="../../../static/images/logo/logo@2x.png" alt="nav-logo" width="174" height="44"></a></div>
+                        <div class="nav-logo"><a href="/"><img src="../../../static/images/logo/logo@2x.png" alt="nav-logo" width="174" height="44"></a></div>
                         <div class="bottom-canvas">
-                            <div class="login-box flex align-center">
+                            <!-- <div class="login-box flex align-center">
                                 <a href="#modalLogin" data-bs-toggle="modal">Login</a>
                                 <span>/</span>
                                 <a href="#modalRegister" data-bs-toggle="modal">Register</a>
-                            </div>
+                            </div> -->
                             <div class="menu-outer"></div>
-                            <div class="button-mobi-sell">
+                            <!-- <div class="button-mobi-sell">
                                 <a class="tf-btn primary" href="add-property.html">Submit Property</a>
-                            </div> 
+                            </div>  -->
                             <div class="mobi-icon-box">
                                 <div class="box d-flex align-items-center">
                                     <span class="icon icon-phone2"></span>
@@ -54,7 +54,7 @@
                 <div class="container">
                     <div class="breadcrumb-content">
                         <ul class="breadcrumb">
-                            <li><a href="index.html" class="text-white">Home</a></li>
+                            <li><a href="/" class="text-white">Home</a></li>
                             <li class="text-white">/ Pages</li>
                             <li class="text-white">/ Our Services</li>
                         </ul>
@@ -80,7 +80,7 @@
                             <div class="content">
                                 <h5 class="title">Buy A New Home</h5>
                                 <p class="description">Discover your dream home effortlessly. Explore diverse properties and expert guidance for a seamless buying experience.</p>
-                                <a href="sidebar-grid.html" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
+                                <a href="{% url 'about' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
                             </div>
                         </div>
                         <div class="box-service">
@@ -90,7 +90,7 @@
                             <div class="content">
                                 <h5 class="title">Sell a home</h5>
                                 <p class="description">Sell confidently with expert guidance and effective strategies, showcasing your property's best features for a successful sale.</p>
-                                <a href="sidebar-grid.html" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
+                                <a href="{% url 'about' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
                             </div>
                         </div>
                         <div class="box-service">
@@ -100,7 +100,7 @@
                             <div class="content">
                                 <h5 class="title">Rent a home</h5>
                                 <p class="description">Discover your perfect rental effortlessly. Explore a diverse variety of listings tailored precisely to suit your unique lifestyle needs.</p>
-                                <a href="sidebar-grid.html" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
+                                <a href="{% url 'about' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
                             </div>
                         </div>
                     </div>
@@ -437,7 +437,7 @@
                                 <div class="text-subtitle text-primary">Become Partners</div>
                                 <h3 class="mt-4 fw-8">List your Properties on Homelengo, join Us Now!</h3>
                             </div>
-                            <a href="contact.html" class="tf-btn btn-view primary size-1 hover-btn-view">Become A Hosting <span class="icon icon-arrow-right2"></span></a>
+                            <a href="{% url 'direct_contact' %}" class="tf-btn btn-view primary size-1 hover-btn-view">Become A Hosting <span class="icon icon-arrow-right2"></span></a>
                         </div>
                         <div class="box-right">
                             <img src="../../../static/images/banner/banner-property-1.jpg" alt="image">

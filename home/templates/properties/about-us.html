@@ -22,7 +22,7 @@
                 <div class="mobile-menu">
                     <div class="menu-backdrop"></div>                            
                     <nav class="menu-box">
-                        <div class="nav-logo"><a href="index.html"><img src="images/logo/logo%402x.png" alt="nav-logo" width="174" height="44"></a></div>
+                        <div class="nav-logo"><a href="/"><img src="images/logo/logo%402x.png" alt="nav-logo" width="174" height="44"></a></div>
                         <!-- <div class="bottom-canvas">
                             <div class="login-box flex align-center">
                                 <a href="#modalLogin" data-bs-toggle="modal">Login</a>
@@ -31,7 +31,7 @@
                             </div> -->
                             <div class="menu-outer"></div>
                             <div class="button-mobi-sell">
-                                <a class="tf-btn primary" href="add-property.html">Submit Property</a>
+                                <a class="tf-btn primary" href="{% url 'direct_contact' %}">Direct Contact</a>
                             </div> 
                             <div class="mobi-icon-box">
                                 <div class="box d-flex align-items-center">
@@ -92,7 +92,7 @@
                                     <p class="text-variant-2">CEO & Founder</p>
                                 </div>
                             </div>
-                            <a href="{% url 'contact' %}" class="tf-btn btn-view primary hover-btn-view">
+                            <a href="{% url 'direct_contact' %}" class="tf-btn btn-view primary hover-btn-view">
                                 Contact us 
                                 <span class="icon icon-arrow-right2"></span>
                             </a>
@@ -120,7 +120,7 @@
         <div class="row justify-content-center"> <!-- Added 'row' and 'justify-content-center' for centering -->
             <div class="col-12 col-sm-8 col-md-6 col-lg-4"> <!-- Adjusted column size for responsiveness -->
                 <div class="box-agent hover-img wow fadeInUp" data-wow-delay=".2s">
-                    <a href="#" class="box-img img-style">
+                    <a href="/" class="box-img img-style">
                         <img class="lazyload" data-src="../../../static/images/agents/bezaleel ceo.jpg" src="../../../static/images/agents/bezaleel ceo.jpg" alt="image-agent">
                         <ul class="agent-social">
                             <li><span class="icon icon-facebook"></span></li>
@@ -445,7 +445,7 @@
                                 <p class="desc text-variant-1">Our seasoned professionals, armed with extensive market knowledge, walk alongside you through every phase of your property endeavor.</p>
                             </div>
                             <div class="flat-service">
-                                <a href="#" class="box-benefit hover-btn-view">
+                                <a href="/" class="box-benefit hover-btn-view">
                                     <div class="icon-box">
                                         <span class="icon">
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -468,7 +468,7 @@
                                        
                                     </div>
                                 </a>
-                                <a href="#" class="box-benefit hover-btn-view">
+                                <a href="/" class="box-benefit hover-btn-view">
                                     <div class="icon-box">
                                         <span class="icon">
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -493,7 +493,7 @@
 
                                     </div>
                                 </a>
-                                <a href="#" class="box-benefit hover-btn-view">
+                                <a href="/" class="box-benefit hover-btn-view">
                                     <div class="icon-box">
                                         <span class="icon">
                                             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -536,7 +536,7 @@
                                 <div class="text-subtitle text-primary">Become Partners</div>
                                 <h3 class="mt-4 fw-8">List your Properties on Homelengo, join Us Now!</h3>
                             </div>
-                            <a href="contact.html" class="tf-btn btn-view primary size-1 hover-btn-view">Become A Hosting <span class="icon icon-arrow-right2"></span></a>
+                            <a href="{% url 'contact' %}" class="tf-btn btn-view primary size-1 hover-btn-view">Become A Hosting <span class="icon icon-arrow-right2"></span></a>
                         </div>
                         <div class="box-right">
                             <img src="../../../static/images/banner/banner.png" alt="image">

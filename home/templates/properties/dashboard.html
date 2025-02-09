@@ -20,7 +20,7 @@
 
                 <!-- sidebar dashboard -->
                 <div class="sidebar-menu-dashboard">
-                    <a href="index.html" class="logo-box">
+                    <a href="/" class="logo-box">
                         <img src="images/logo/logo-footer%402x.png" alt="">
                     </a>
                     <div class="user-box">
@@ -194,7 +194,7 @@
                                                                 <img src="{{ property.image.url}}" alt="images">
                                                             </div>
                                                             <div class="content">
-                                                                <div class="title"><a href="property-details-v1.html" class="link">{{property.title}}</a> </div>
+                                                                <div class="title"><a href="{% url 'property_detail' property_id=property.id %}" class="link">{{property.title}}</a> </div>
                                                                 <div class="text-date">{{property.date_created}}</div>
                                                                 <div class="text-btn text-primary">{{property.price}}</div> 
                                                             </div>
