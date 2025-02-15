@@ -2563,7 +2563,7 @@ label {
   z-index: 123;
 }
 .flat-slider.home-1 {
-  background-image: url(../images/slider/slider-1.jpg);
+  background-image: url(../images/home/white_house.jpg);
 }
 .flat-slider.home-1 .overlay {
   background: #161e2d;
@@ -2640,7 +2640,7 @@ label {
   object-fit: cover;
 }
 .flat-slider.home-3 {
-  background-image: url(../images/slider/slider-3.jpg);
+  background-image: url(../images/home/white_house.jpg);
   padding: 168px 0px;
 }
 .flat-slider.home-3 .slider-content {

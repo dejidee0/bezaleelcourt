@@ -122,12 +122,12 @@
         <div class="box-agent hover-img wow fadeInUp" data-wow-delay=".2s">
             <a href="#" class="box-img img-style">
                 <img class="lazyload" data-src="{% static 'images/agents/bezaleel ceo.jpg' %}" src="{% static 'images/agents/bezaleel ceo.jpg' %}" alt="image-agent">
-                <ul class="agent-social">
+                {% comment %} <ul class="agent-social">
                     <li><span class="icon icon-facebook"></span></li>
                     <li><span class="icon icon-x"></span></li>
                     <li><span class="icon icon-linkedin"></span></li>
                     <li><span class="icon icon-instargram"></span></li>
-                </ul>
+                </ul> {% endcomment %}
             </a>
             <div class="content">
                 <div class="info">
@@ -172,7 +172,7 @@
 </section>
 <!-- End Agents -->
             <!-- partner -->
-            <section class="flat-section pt-0">
+            {% comment %} <section class="flat-section pt-0">
                 <div class="container2">
                     <h6 class="mb-20 text-center text-capitalize text-black-4">Trusted by over 150+ major companies</h6>
                     <div class="swiper tf-sw-partner" data-preview="6" data-tablet="4" data-mobile-sm="3" data-mobile="2" data-space="15" data-space-md="30" data-space-lg="30">
@@ -423,7 +423,7 @@
 
                     </div>
                 </div>
-            </section>
+            </section> {% endcomment %}
             <!-- End partner -->
             <!-- img with text -->
             <section class="flat-section bg-primary-new">
