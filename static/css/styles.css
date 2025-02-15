@@ -2670,8 +2670,9 @@ label {
   object-fit: cover;
 }
 .flat-slider.home-5 .thumbs-swiper-column1 .swiper-wrapper {
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-end;
+  justify-content: center;
 }
 .flat-slider.home-5 .thumbs-swiper-column1 .swiper-wrapper .swiper-slide {
   width: 80px !important;

@@ -12,10 +12,8 @@ from django.core.mail import send_mail
 
 def index(request):
     properties = Property.objects.all()
-    lands = Property.objects.filter(label='land_to_sell')
-    buildings = Property.objects.filter(label='building_to_sell')
     
-    return render(request, 'properties/index.html', {'properties': properties, 'lands': lands, 'buildings': buildings})
+    return render(request, 'properties/index.html', {'properties': properties, })
 
 def property_detail(request, property_id):
     property = get_object_or_404(Property, pk=property_id)
@@ -262,11 +260,6 @@ def direct_contact(request):
         form = DirectContactForm()
 
     return render(request, 'properties/direct-contact.html', {'form': form})
-
-
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
-from .models import Property
 
 def category_properties(request, category):
     if request.method == "GET":

@@ -80,7 +80,7 @@
                             <div class="content">
                                 <h5 class="title">Buy A New Home</h5>
                                 <p class="description">Discover your dream home effortlessly. Explore diverse properties and expert guidance for a seamless buying experience.</p>
-                                <a href="{% url 'about' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
+                                <a href="{% url 'all_properties' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
                             </div>
                         </div>
                         <div class="box-service">
@@ -98,9 +98,9 @@
                                 <img class="lazyload" data-src="../../../static/images/service/home-3.png" src="../../../static/images/service/home-3.png" alt="image-location">
                             </div>
                             <div class="content">
-                                <h5 class="title">Rent a home</h5>
+                                <h5 class="title">Buy a Land</h5>
                                 <p class="description">Discover your perfect rental effortlessly. Explore a diverse variety of listings tailored precisely to suit your unique lifestyle needs.</p>
-                                <a href="{% url 'about' %}" class="tf-btn btn-line">Learn More <span class="icon icon-arrow-right2"></span></a>
+                                <a href="{% url 'all_properties' %}" class="tf-btn btn-line" id="land-link">Learn More <span class="icon icon-arrow-right2"></span></a>
                             </div>
                         </div>
                     </div>
@@ -449,5 +449,13 @@
  
         </div>
     </div>
+
+                <script>
+        document.getElementById("land-link").addEventListener("click", function(event) {
+            event.preventDefault();
+            let url = this.getAttribute("href");
+            window.location.href = url + "?type=land";
+        });
+    </script>
 
     {% endblock %}

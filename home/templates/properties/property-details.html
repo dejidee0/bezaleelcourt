@@ -86,7 +86,7 @@
                     <div class="swiper-wrapper">
                         {% for image in images %}
                         <div class="swiper-slide">
-                            <a href="{{ image.image }}" data-fancybox="gallery" class="box-img-detail d-block">
+                            <a href="#" data-fancybox="gallery" class="box-img-detail d-block">
                                 <img src="{{ image.image.url }}" alt="img-property">
                             </a>
                         </div>
@@ -163,6 +163,7 @@
                                     </li>
                                 </ul>
                             </div>
+                            {% if property.video_url %}
                             <div class="single-property-element single-property-video">
                                 <h5 class="title fw-6">Video</h5>
                                 <div class="img-video">
@@ -173,9 +174,12 @@
                                             <img src="{% static 'default-image.jpg' %}" alt="No Image Available">
                                         {% endif %}
                                     {% endwith %}     
-                                    <a href="{{property.video_url}}" data-fancybox="gallery2" class="btn-video"> <span class="icon icon-play"></span></a>
+                                    <a href="{{ property.video_url }}" data-fancybox="gallery2" class="btn-video"> 
+                                        <span class="icon icon-play"></span>
+                                    </a>
                                 </div>
-                            </div> 
+                            </div>
+                            {% endif %}
                                     
                         </div>
                         <div class="col-xl-4 col-lg-5">

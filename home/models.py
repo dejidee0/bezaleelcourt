@@ -19,16 +19,16 @@ class Property(models.Model):
     ]
 
     LABEL_CHOICES = [
-        ('commercial_land', 'Commercial Land'),
-        ('office_space', 'Office Space'),
-        ('residential_land', 'Residential Land'),
+        ('off_plan_houses', 'Off Plan Houses'),
         ('apartments', 'Apartments'),
+        ('duplexes', 'Duplexes'),
         ('bungalows', 'Bungalows'),
         ('fully_detached_duplexes', 'Fully Detached Duplexes'),
         ('semi_detached_duplexes', 'Semi Detached Duplexes'),
         ('terrace_duplexes', 'Terrace Duplexes'),
         ('maisonettes', 'Maisonettes'),
         ('penthouses', 'Penthouses'),
+        ("lands", "Lands"),
     ]
 
     PROPERTY_TYPE_CHOICES = [
@@ -38,16 +38,16 @@ class Property(models.Model):
     ]
 
     CATEGORY_CHOICES = [
-        ("commercial_land", "Commercial Land"),
-        ("office_space", "Office Space"),
-        ("residential_land", "Residential Land"),
-        ("apartments", "Apartments"),
-        ("bungalows", "Bungalows"),
-        ("fully_detached_duplex", "Fully Detached Duplexes"),
-        ("semi_detached_duplex", "Semi-Detached Duplexes"),
-        ("terrace_duplex", "Terrace Duplexes"),
-        ("maisonettes", "Maisonettes"),
-        ("penthouses", "Penthouses"),
+        ('off_plan_houses', 'Off Plan Houses'),
+        ('apartments', 'Apartments'),
+        ('duplexes', 'Duplexes'),
+        ('bungalows', 'Bungalows'),
+        ('fully_detached_duplexes', 'Fully Detached Duplexes'),
+        ('semi_detached_duplexes', 'Semi Detached Duplexes'),
+        ('terrace_duplexes', 'Terrace Duplexes'),
+        ('maisonettes', 'Maisonettes'),
+        ('penthouses', 'Penthouses'),
+        ("lands", "Lands"),
     ]
 
     id = models.CharField(
