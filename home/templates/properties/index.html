@@ -21,18 +21,21 @@
                         </div>
                         
                         <div class="flat-tab flat-tab-form">
-
-                            <ul class="nav-tab-form style-1 justify-content-center" role="tablist">
+                            
+                            {% comment %} <ul class="nav-tab-form style-1 justify-content-center" role="tablist">
+                                <<a href="{% url "all_properties" %}">
                                 <li class="nav-tab-item" role="presentation">   
-                                    <a href="#LandForBuy" class="nav-link-item active"  data-bs-toggle="tab">Buy Land</a>
-                                </li>
+                                    <a href="{% url "all_properties" %}" class="nav-link-item active"  data-bs-toggle="tab">Buy Land</a>
+                                </li></a>
+                                <a href="{% url "all_properties" %}">
                                 <li class="nav-tab-item" role="presentation">   
-                                    <a href="#forRent" class="nav-link-item active"  data-bs-toggle="tab">Buy House</a>
-                                </li>
+                                    <a href="{% url "all_properties" %}" class="nav-link-item"  data-bs-toggle="tab">Buy House</a>
+                                </li></a>
+                                <a href="{% url "all_properties" %}">
                                 <li class="nav-tab-item" role="presentation">
-                                    <a href="#forSale" class="nav-link-item" data-bs-toggle="tab">Sell your property</a>
-                                </li>
-                            </ul>
+                                    <a href="{% url "all_properties" %}" class="nav-link-item" data-bs-toggle="tab">Sell your property</a>
+                                </li></a>
+                            </ul> {% endcomment %}
 
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" role="tabpanel">
@@ -550,8 +553,8 @@
             </a>
             <div class="content">
                 <div class="info">
-                    <h5><a class="link" href="#">Ayankojo Rebecca Oluwaseun</a></h5>
-                    <p class="text-variant-1">Ceo Bezaleel Court, Lead Real Agent Consultant</p>
+                    <h5><a class="link" href="#">Oluwaseun Olagunju-Ayankojo</a></h5>
+                    <p class="text-variant-1">Lead Consultant Bezaleel Court Property Limited</p>
                 </div>
                 <div class="box-icon">
                     <span class="icon icon-phone"></span>
