@@ -196,18 +196,18 @@
                     <span class="icon icon-phone2"></span>
                     <div>+234 803 930 1830</div>
                   </div>
-                  <div class="box d-flex align-items-center">
+                  {% comment %} <div class="box d-flex align-items-center">
                     <span class="icon icon-mail"></span>
                     <div>help@bezaleelcourt.com</div>
-                  </div>
+                  </div> {% endcomment %}
                   <div class="box d-flex align-items-center">
                     <span class="icon icon-mail"></span>
                     <div>Info@bezaleelcourt.com</div>
                   </div>
-                  <div class="box d-flex align-items-center">
+                  {% comment %} <div class="box d-flex align-items-center">
                     <span class="icon icon-mail"></span>
                     <div>Ceo@bezaleelcourt.com</div>
-                  </div>
+                  </div> {% endcomment %}
                 </div>
               </div>
             </nav>
@@ -377,7 +377,7 @@
                     </ul>
                   </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-4 col-md-6">
                   <div class="footer-cl-2 footer-col-block">
                     <div class="fw-7 text-white footer-heading-mobile">
                       Categories
@@ -385,8 +385,8 @@
                     <div class="tf-collapse-content">
                       <ul class="mt-10 navigation-menu-footer">
                         <li>
-                          <a href="#" class="caption-1 text-variant-2"
-                            >Pricing Plans</a
+                          <a href="{% url 'all_properties' %}" class="caption-1 text-variant-2"
+                            >Listings</a
                           >
                         </li>
 
@@ -417,7 +417,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                {% comment %} <div class="col-lg-2 col-md-6">
                   <div class="footer-cl-3 footer-col-block">
                     <div class="fw-7 text-white footer-heading-mobile">
                       Our Company
@@ -455,7 +455,7 @@
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> {% endcomment %}
                 <div class="col-lg-4 col-md-6">
                   <div class="footer-cl-4 footer-col-block">
                     <div class="fw-7 text-white footer-heading-mobile">

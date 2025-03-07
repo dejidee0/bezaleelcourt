@@ -682,23 +682,23 @@
                                             <i class="icon icon-mail fs-20 text-variant-2"></i>
                                             <p class="text-white">Info@bezaleelcourt.com</p>
                                           </li>
-                                          <li class="mt-12 d-flex align-items-center gap-8">
+                                          {% comment %} <li class="mt-12 d-flex align-items-center gap-8">
                                             <i class="icon icon-mail fs-20 text-variant-2"></i>
                                             <p class="text-white">help@bezaleelcourt.com</p>
                                           </li>
                                           <li class="mt-12 d-flex align-items-center gap-8">
                                             <i class="icon icon-mail fs-20 text-variant-2"></i>
                                             <p class="text-white">Ceo@bezaleelcourt.com</p>
-                                          </li>
+                                          </li> {% endcomment %}
                                       </ul>
                                     </div>
                                   </div>
-                                  <div class="col-lg-2 col-md-6">
+                                  <div class="col-lg-4 col-md-6">
                                     <div class="footer-cl-2 footer-col-block">
                                         <div class="fw-7 text-white footer-heading-mobile">Categories</div>
                                         <div class="tf-collapse-content">
                                             <ul class="mt-10 navigation-menu-footer">   
-                                                <li> <a href="#" class="caption-1 text-variant-2">Pricing Plans</a> </li>
+                                                <li> <a href="{% url 'all_properties' %}" class="caption-1 text-variant-2">Listings</a> </li>
                 
                                                 <li> <a href="{% url 'services' %}" class="caption-1 text-variant-2">Our Services</a> </li>
                 
@@ -710,7 +710,7 @@
                                         
                                     </div>
                                   </div>
-                                  <div class="col-lg-2 col-md-6">
+                                  {% comment %} <div class="col-lg-2 col-md-6">
                                     <div class="footer-cl-3 footer-col-block">
                                         <div class="fw-7 text-white footer-heading-mobile">Our Company</div>
                                         <div class="tf-collapse-content">
@@ -722,8 +722,8 @@
                                             </ul>
                                         </div>
                                         
-                                    </div>
-                                  </div>
+                                    </div> 
+                                  </div> {% endcomment %}
                                   <div class="col-lg-4 col-md-6">
                                     <div class="footer-cl-4 footer-col-block">
                                         <div class="fw-7 text-white footer-heading-mobile">Newsletter</div>
